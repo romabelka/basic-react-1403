@@ -1,4 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import articles from './fixtures'
+import App from './components/app'
 
-ReactDOM.render(<h1>Hello World</h1>, document.getElementById('root'))
+ReactDOM.render(<App articles={articles} />, document.getElementById('root'))
