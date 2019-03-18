@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 export default (OriginalComponent) =>
-  class ToggleOpenDecorator extends Component {
+  class AccordionDecorator extends Component {
     state = {
       openItemId: null
     }
@@ -13,7 +13,7 @@ export default (OriginalComponent) =>
       return (
         <OriginalComponent
           {...this.props}
-          openArticleId={this.state.openItemId}
+          openItemId={this.state.openItemId}
           toggleOpenItem={this.toggleOpenItem}
         />
       )

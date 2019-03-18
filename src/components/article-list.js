@@ -1,24 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Article from './article'
-import toggleOpen from '../decorators/toggle-open'
+import useAccordion from '../custom-hooks/accordion'
 
-class ArticleList extends Component {
-  render() {
-    return <ul>{this.getArticles()}</ul>
-  }
+function ArticleList({ articles }) {
+  const { openItemId, toggleOpenItem } = useAccordion()
 
-  getArticles() {
-    const { articles, toggleOpenItem, openItemId } = this.props
-    return articles.map((article) => (
-      <li key={article.id}>
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          onBtnClick={toggleOpenItem(article.id)}
-        />
-      </li>
-    ))
-  }
+  const articleItems = articles.map((article) => (
+    <li key={article.id}>
+      <Article
+        article={article}
+        isOpen={article.id === openItemId}
+        onBtnClick={toggleOpenItem(article.id)}
+      />
+    </li>
+  ))
+
+  return <ul>{articleItems}</ul>
 }
 
-export default toggleOpen(ArticleList)
+export default ArticleList
