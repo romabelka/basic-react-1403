@@ -1,13 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Article from './article'
+import ToggleOpenComponent from './toggle-open-component'
 
-class ArticleList extends Component {
-  state = {
-    openArticleId: null
-  }
-
-  toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
-
+class ArticleList extends ToggleOpenComponent {
   render() {
     return <ul>{this.getArticles()}</ul>
   }
