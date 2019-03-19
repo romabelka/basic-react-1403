@@ -10,7 +10,7 @@ function ArticleList({ articles }) {
       <Article
         article={article}
         isOpen={article.id === openItemId}
-        onBtnClick={toggleOpenItem(article.id)}
+        onBtnClick={toggleOpenItem(article.id, article.id === openItemId)}
       />
     </li>
   ))
