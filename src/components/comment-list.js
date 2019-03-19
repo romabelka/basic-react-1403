@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Comment from './comment'
-import ToggleItemDecorator from './../decorators/toggle-item'
+import useToggleItem from '../custom-hooks/toggle-item'
 
-function CommentList({ comments, isOpen, toggleItem }) {
+function CommentList({ comments }) {
+  const { isOpen, toggleItem } = useToggleItem()
   const buttonText = isOpen ? 'close comments' : 'open comments'
   const commentElements = comments.map((comment) => (
     <li key={comment.id}>
@@ -30,4 +31,4 @@ function CommentList({ comments, isOpen, toggleItem }) {
   }
 }
 
-export default ToggleItemDecorator(CommentList)
+export default CommentList
