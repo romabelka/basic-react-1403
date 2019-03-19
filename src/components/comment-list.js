@@ -1,23 +1,19 @@
 import React, { useState } from 'react'
 import Comment from './comment'
+import ToggleItemDecorator from './../decorators/toggle-item'
 
-function CommentList({ comments }) {
-  const [isOpen, setIsOpen] = useState(true)
-
+function CommentList({ comments, isOpen, toggleItem }) {
   const buttonText = isOpen ? 'close comments' : 'open comments'
   const commentElements = comments.map((comment) => (
     <li key={comment.id}>
       <Comment comment={comment} />
     </li>
   ))
-  const onBtnClick = () => {
-    setIsOpen(!isOpen)
-  }
 
   return (
     <div>
       {getBody(isOpen)}
-      <button onClick={onBtnClick}>{buttonText}</button>
+      <button onClick={toggleItem}>{buttonText}</button>
     </div>
   )
 
@@ -34,4 +30,4 @@ function CommentList({ comments }) {
   }
 }
 
-export default CommentList
+export default ToggleItemDecorator(CommentList)
