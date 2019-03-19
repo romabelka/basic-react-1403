@@ -2,10 +2,10 @@ import { Component } from 'react'
 
 class ToggleOpenComponent extends Component {
   state = {
-    openArticleId: null
+    openItemId: null
   }
 
-  toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+  toggleOpenItem = (openItemId) => () => this.setState({ openItemId })
 }
 
 export default ToggleOpenComponent
