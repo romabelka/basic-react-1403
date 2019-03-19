@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export default function useFoldable() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const toggleExpanded = () => () => setIsExpanded(!isExpanded)
+  const toggleExpansion = () => () => setIsExpanded(!isExpanded)
 
-  return { isExpanded, toggleExpanded }
+  return { isExpanded, toggleExpansion }
 }
