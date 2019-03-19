@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import useFoldable from '../custom-hooks/foldable'
+// import useFoldable from '../custom-hooks/foldable'
+import foldable from '../decorators/foldable'
 
-function CommentList({ comments }) {
-  const { isExpanded, toggleExpanded } = useFoldable()
+function CommentList({ comments, isExpanded, toggleExpansion }) {
+  //   const { isExpanded, toggleExpanded } = useFoldable()
 
   const getComments = () => {
-    if (!isExpanded || !comments.length) return null
+    if (!isExpanded) return null
+    if (!comments || !comments.length) return <div>No comments</div>
     return (
       <ul>
-        {' '}
         {comments.map((comment) => {
           return (
             <li key={comment.id}>
@@ -23,10 +24,11 @@ function CommentList({ comments }) {
 
   return (
     <div>
-      <button onClick={toggleExpanded()}>{isExpanded ? 'hide comments' : 'show comments'}</button>
+      <button onClick={toggleExpansion()}>{isExpanded ? 'hide comments' : 'show comments'}</button>
       {getComments()}
     </div>
   )
 }
 
-export default CommentList
+// export default CommentList
+export default foldable(CommentList)
