@@ -1,5 +1,8 @@
 import React from 'react'
+// Если испльзовать хуки
 import Article from './article'
+// Если использовать декоратор
+// import Article from './article-class'
 import useAccordion from '../custom-hooks/accordion'
 
 function ArticleList({ articles }) {
