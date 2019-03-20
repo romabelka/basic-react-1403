@@ -1,5 +1,5 @@
 import React from 'react'
-import CommentListHooks from './Comments/comment-list-hooks'
+import CommentListHooks from './Comments/comment-list-decorators'
 
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'

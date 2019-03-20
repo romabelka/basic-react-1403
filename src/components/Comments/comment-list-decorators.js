@@ -21,6 +21,8 @@ class CommentList extends Component {
 
     if (!isOpen) return
 
+    if (!comments || !comments.length) return 'No comments yet'
+
     const commentItems = comments.map((comment) => (
       <li key={comment.id}>
         <Comment comment={comment} />
