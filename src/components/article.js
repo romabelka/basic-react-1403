@@ -1,18 +1,22 @@
 import React from 'react'
+import useToggleFlag from '../custom-hooks/toggleFlag'
 
-function Article({ isOpen, article, onBtnClick }) {
-  const text = isOpen ? 'close' : 'open'
+function Article({ article }) {
+  // тяжело конечно привыкнуть в hook, но их мощь я конечно почувствовал!!!
+  const { flag, toggleFlag } = useToggleFlag()
+
+  const text = !flag ? 'close' : 'open'
   return (
     <div>
       <h3>{article.title}</h3>
-      <button onClick={onBtnClick}>{text}</button>
-      {getBody({ isOpen, article })}
+      <button onClick={toggleFlag}>{text}</button>
+      {getBody({ flag, article })}
     </div>
   )
 }
 
-function getBody({ isOpen, article }) {
-  if (!isOpen) return null
+function getBody({ flag, article }) {
+  if (!flag) return null
   return <section>{article.text}</section>
 }
 

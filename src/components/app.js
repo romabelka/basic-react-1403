@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import DayPicker from './dayPicker'
 
 function App({ articles }) {
-  const [username, setUsername] = useState('Roma')
+  const [username, setUsername] = useState('Vladimir')
   const [selected, setSelected] = useState()
 
   const handleUserChange = (ev) => {
@@ -28,6 +29,7 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
+      <DayPicker />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
       <ArticleList articles={articles} />
     </div>

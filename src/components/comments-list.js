@@ -3,6 +3,8 @@ import Comment from './comment'
 // import DecoratorAccordion from '../decorators/accordion'
 import useAccordion from '../custom-hooks/accordion'
 
+// Реализация компонетна через декоратор
+
 // class CommentsList extends Component{
 //   getComments(){
 //     const {comments, toggleOpenItem, openItemId} = this.props;
@@ -21,6 +23,8 @@ import useAccordion from '../custom-hooks/accordion'
 //       return <ul>{this.getComments()}</ul>
 //   }
 // }
+
+// Реализация компонента через hooks
 
 function CommentsList({ comments }) {
   function getComments() {
