@@ -7,7 +7,16 @@ export default (OriginalComponent) =>
       openItemId: null
     }
 
-    toggleOpenItem = (openItemId) => () => this.setState({ openItemId })
+    // doesn't work button close
+    toggleOpenItem = (id) => () => {
+      const { openItemId } = this.state;
+
+      if (openItemId === id) {
+        return this.setState({ openItemId: null })
+      }
+
+      return this.setState({ openItemId: id })
+    }
 
     render() {
       return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
-import DataPicker from './data-picker';
+import DataPicker from './data-picker'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -20,7 +20,6 @@ function App({ articles }) {
   return (
     <>
       <DataPicker />
-
       <h1>Article App</h1>
       Username:{' '}
       <input
