@@ -11,6 +11,7 @@ function ArticleList({ articles }) {
         article={article}
         isOpen={article.id === openItemId}
         onBtnClick={toggleOpenItem(article.id)}
+        comments={article.comments}
       />
     </li>
   ))

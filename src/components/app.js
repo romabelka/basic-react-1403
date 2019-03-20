@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import Calendar from './calendar'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -16,6 +17,8 @@ function App({ articles }) {
     value: article.id
   }))
 
+  const numberOfMonth = 3
+
   return (
     <>
       <h1>Article App</h1>
@@ -28,6 +31,7 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
+      <Calendar numberOfMonths={numberOfMonth} />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
       <ArticleList articles={articles} />
     </>
