@@ -1,19 +1,22 @@
 import React from 'react'
+import CommentsList from './Comments/CommentsList'
 
-function Article({ isOpen, article, onBtnClick }) {
+const Article = ({ isOpen, article, onBtnClick }) => {
   const text = isOpen ? 'close' : 'open'
+  const articleComments = article.comments
+
   return (
     <div>
       <h3>{article.title}</h3>
       <button onClick={onBtnClick}>{text}</button>
-      {getBody({ isOpen, article })}
+      {isOpen ? (
+        <React.Fragment>
+          <section>{article.text}</section>
+          <CommentsList comments={articleComments} />
+        </React.Fragment>
+      ) : null}
     </div>
   )
-}
-
-function getBody({ isOpen, article }) {
-  if (!isOpen) return null
-  return <section>{article.text}</section>
 }
 
 export default Article

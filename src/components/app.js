@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import RangeDaypicker from './RangeDaypicker'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -18,7 +19,7 @@ function App({ articles }) {
 
   return (
     <>
-      <h1>Article App</h1>
+      <RangeDaypicker />
       Username:{' '}
       <input
         type="text"
