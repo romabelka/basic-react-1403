@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import Calendar from './day-picker.js'
 
 function App({ articles }) {
-  const [username, setUsername] = useState('Roma')
+  const [username, setUsername] = useState('Andrey')
   const [selected, setSelected] = useState()
 
   const handleUserChange = (ev) => {
@@ -19,6 +20,7 @@ function App({ articles }) {
   return (
     <>
       <h1>Article App</h1>
+      <Calendar />
       Username:{' '}
       <input
         type="text"
