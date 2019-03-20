@@ -15,7 +15,7 @@ function ArticleList({ articles }) {
     </li>
   ))
 
-  return <ul>{articleItems}</ul>
+  return <ol>{articleItems}</ol>
 }
 
 export default ArticleList

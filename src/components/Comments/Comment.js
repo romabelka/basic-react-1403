@@ -2,6 +2,7 @@ import React from 'react'
 
 const Comment = ({ isOpen, comment, onBtnClick }) => {
   const text = isOpen ? 'close' : 'open'
+
   return (
     <div>
       <h3>{comment.user}</h3>

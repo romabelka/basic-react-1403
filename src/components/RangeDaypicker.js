@@ -25,8 +25,9 @@ class RangeDaypicker extends Component {
           onDayClick={this.handleDayClick}
         />
         <p>
-          Selected date from {from && <span>{from.toLocaleDateString()}</span>} to{' '}
-          {to && <span>{to.toLocaleDateString()}</span>}
+          Selected date from{' '}
+          {from ? <span>{from.toLocaleDateString()}</span> : <span>DD.MM.YYYY</span>} to{' '}
+          {to ? <span>{to.toLocaleDateString()}</span> : <span>DD.MM.YYYY</span>}
         </p>
       </Fragment>
     )
