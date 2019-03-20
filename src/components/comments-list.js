@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Comment from './comment'
+import ToggleOpenDecorator from '../decorators/toggle-open'
 
-function CommentsList({ comments }) {
-  const [isOpen, setIsOpen] = useState(false)
-
+function CommentsList({ comments, isOpen, toggleOpen }) {
   const btnText = isOpen ? 'Hide comments' : 'Show comments'
-  const onBtnClick = () => setIsOpen(!isOpen)
 
   return (
     <>
       <div>
-        <button type="button" className="btn btn-secondary" onClick={onBtnClick}>
+        <button type="button" className="btn btn-secondary" onClick={toggleOpen}>
           {btnText}
         </button>
       </div>
@@ -30,4 +28,4 @@ function getComments({ comments, isOpen }) {
   return <ul className="list-group list-group-flush mt-3">{commentsList}</ul>
 }
 
-export default CommentsList
+export default ToggleOpenDecorator(CommentsList)
