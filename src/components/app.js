@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import Datepickers from './datepickers'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -29,6 +30,7 @@ function App({ articles }) {
         }}
       />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
+      <Datepickers />
       <ArticleList articles={articles} />
     </>
   )
