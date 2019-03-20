@@ -1,6 +1,7 @@
 import React from 'react'
 import Article from './article'
 import useAccordion from '../custom-hooks/accordion'
+import CommentsList from './comments-list'
 
 function ArticleList({ articles }) {
   const { openItemId, toggleOpenItem } = useAccordion()
@@ -12,6 +13,7 @@ function ArticleList({ articles }) {
         isOpen={article.id === openItemId}
         onBtnClick={toggleOpenItem(article.id)}
       />
+      <CommentsList comments={article.comments} />
     </li>
   ))
 

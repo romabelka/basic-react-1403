@@ -17,7 +17,7 @@ function App({ articles }) {
   }))
 
   return (
-    <>
+    <div>
       <h1>Article App</h1>
       Username:{' '}
       <input
@@ -30,7 +30,7 @@ function App({ articles }) {
       />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
       <ArticleList articles={articles} />
-    </>
+    </div>
   )
 }
 
