@@ -1,6 +1,6 @@
 // just fo training create decorator fo calendar
 import React, { Component } from 'react'
-import DayPicker, { DateUtils } from 'react-day-picker'
+import { DateUtils } from 'react-day-picker'
 
 export default (OriginalComponent) =>
   class AccordionDecorator extends Component {
@@ -9,21 +9,22 @@ export default (OriginalComponent) =>
       to: null
     }
 
-    handleDayClick = (state) => (day) => {
-      const range = DateUtils.addDayToRange(day, state)
+    handleDayClick = (day) => {
+      const range = DateUtils.addDayToRange(day, this.state)
       this.setState(range)
     }
-    handleResetClick = (state) => () => {
+    // насколько такой кэрринг используется в Реакте?
+    handleResetClick = ((state) => () => {
       this.setState(state)
-    }
+    })(this.state)
 
     render() {
       return (
         <OriginalComponent
           {...this.props}
-          state={this.state}
-          handleDayClick={this.handleDayClick(this.state)}
-          handleResetClick={this.handleResetClick(this.state)}
+          {...this.state}
+          handleDayClick={this.handleDayClick}
+          handleResetClick={this.handleResetClick}
         />
       )
     }
