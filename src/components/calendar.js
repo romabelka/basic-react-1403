@@ -1,34 +1,22 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
+// decorator
+import CalendarDec from '../decorators/calendarDec'
 
-export default class Calendar extends Component {
+class Calendar extends Component {
   static defaultProps = {
     numberOfMonths: 2
   }
   constructor(props) {
     super(props)
-    this.handleDayClick = this.handleDayClick.bind(this)
-    this.handleResetClick = this.handleResetClick.bind(this)
-    this.state = this.getInitialState()
-  }
-  getInitialState() {
-    return {
-      from: null,
-      to: null
-    }
-  }
-  handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, this.state)
-    this.setState(range)
-  }
-  handleResetClick() {
-    this.setState(this.getInitialState())
   }
   render() {
-    const { from, to } = this.state
+    const { handleResetClick, handleDayClick } = this.props
+    const { from, to } = this.props.state
     const modifiers = { start: from, end: to }
+
     return (
       <div className="RangeExample">
         <p>
@@ -39,7 +27,7 @@ export default class Calendar extends Component {
             `Selected from ${from.toLocaleDateString()} to
                     ${to.toLocaleDateString()}`}{' '}
           {from && to && (
-            <button className="link" onClick={this.handleResetClick}>
+            <button className="link" onClick={handleResetClick}>
               Reset
             </button>
           )}
@@ -49,7 +37,7 @@ export default class Calendar extends Component {
           numberOfMonths={this.props.numberOfMonths}
           selectedDays={[from, { from, to }]}
           modifiers={modifiers}
-          onDayClick={this.handleDayClick}
+          onDayClick={handleDayClick}
         />
         <Helmet>
           <style>{`
@@ -74,3 +62,4 @@ export default class Calendar extends Component {
     )
   }
 }
+export default CalendarDec(Calendar)
