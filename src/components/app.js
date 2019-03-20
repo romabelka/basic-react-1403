@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
+import DatePrickerContainer from './date-picker-container'
 import ArticleList from './article-list'
 
 function App({ articles }) {
@@ -17,7 +18,7 @@ function App({ articles }) {
   }))
 
   return (
-    <>
+    <div>
       <h1>Article App</h1>
       Username:{' '}
       <input
@@ -28,9 +29,10 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
+      <DatePrickerContainer />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
       <ArticleList articles={articles} />
-    </>
+    </div>
   )
 }
 

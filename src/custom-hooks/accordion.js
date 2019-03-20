@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 export default function useAccordion() {
   const [openItemId, setOpenItemId] = useState(null)
-  const toggleOpenItem = (id) => () => setOpenItemId(id)
-
+  const toggleOpenItem = (id) => () => (id === openItemId ? setOpenItemId(null) : setOpenItemId(id))
   return { openItemId, toggleOpenItem }
 }

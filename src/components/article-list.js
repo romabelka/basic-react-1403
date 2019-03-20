@@ -1,21 +1,17 @@
 import React from 'react'
-import Article from './article'
 import useAccordion from '../custom-hooks/accordion'
+import Article from './article'
 
-function ArticleList({ articles }) {
+export default function ArticleList({ articles }) {
   const { openItemId, toggleOpenItem } = useAccordion()
 
-  const articleItems = articles.map((article) => (
-    <li key={article.id}>
-      <Article
-        article={article}
-        isOpen={article.id === openItemId}
-        onBtnClick={toggleOpenItem(article.id)}
-      />
-    </li>
-  ))
+  const articlesView =
+    articles &&
+    articles.map((item) => (
+      <li key={item.id}>
+        <Article {...item} isOpen={item.id === openItemId} onBtnClick={toggleOpenItem(item.id)} />
+      </li>
+    ))
 
-  return <ul>{articleItems}</ul>
+  return <ul>{articlesView}</ul>
 }
-
-export default ArticleList
