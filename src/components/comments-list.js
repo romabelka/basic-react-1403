@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
+import Comment from './comment'
 
 function CommentsList({ comments }) {
   const [isOpen, setIsOpen] = useState(false)
-  const text = isOpen ? 'Hide comments' : 'Show comments'
+
+  const btnText = isOpen ? 'Hide comments' : 'Show comments'
+  const onBtnClick = () => setIsOpen(!isOpen)
 
   return (
     <>
       <div>
-        <button type="button" className="btn btn-secondary" onClick={() => setIsOpen(!isOpen)}>
-          {text}
+        <button type="button" className="btn btn-secondary" onClick={onBtnClick}>
+          {btnText}
         </button>
       </div>
       {getComments({ comments, isOpen })}
@@ -17,16 +20,11 @@ function CommentsList({ comments }) {
 }
 
 function getComments({ comments, isOpen }) {
-  const commentsList = comments.map(({ id, user, text }) => {
-    return (
-      <li key={id} className="list-group-item">
-        <div>
-          <strong>{user}</strong>
-        </div>
-        <div>{text}</div>
-      </li>
-    )
-  })
+  const commentsList = comments.map((comment) => (
+    <li key={comment.id} className="list-group-item">
+      <Comment comment={comment} />
+    </li>
+  ))
 
   if (!isOpen) return null
   return <ul className="list-group list-group-flush mt-3">{commentsList}</ul>
