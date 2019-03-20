@@ -1,5 +1,5 @@
 import React from 'react'
-import CommentList from './Comments/comment-list'
+import CommentListHooks from './Comments/comment-list-hooks'
 
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
@@ -18,7 +18,7 @@ function getBody({ isOpen, article }) {
   return (
     <section>
       {article.text}
-      <CommentList comments={article.comments} />
+      <CommentListHooks comments={article.comments} />
     </section>
   )
 }
