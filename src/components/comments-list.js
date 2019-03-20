@@ -1,8 +1,9 @@
 import React from 'react'
 import Comment from './comment'
-import ToggleOpenDecorator from '../decorators/toggle-open'
+import useToggleOpen from '../custom-hooks/toggle-open'
 
-function CommentsList({ comments, isOpen, toggleOpen }) {
+function CommentsList({ comments }) {
+  const { isOpen, toggleOpen } = useToggleOpen()
   const btnText = isOpen ? 'Hide comments' : 'Show comments'
 
   return (
@@ -28,4 +29,4 @@ function getComments({ comments, isOpen }) {
   return <ul className="list-group list-group-flush mt-3">{commentsList}</ul>
 }
 
-export default ToggleOpenDecorator(CommentsList)
+export default CommentsList
