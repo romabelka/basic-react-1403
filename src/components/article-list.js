@@ -3,13 +3,18 @@ import PropTypes from 'prop-types'
 import Article from './article'
 import accordion from '../decorators/accordion'
 
-class ArticleList extends Component {
+export class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired
   }
 
   state = {
     error: null
+  }
+
+  componentDidMount() {
+    const { fetchAll } = this.props
+    fetchAll && fetchAll()
   }
 
   componentDidCatch(error) {
@@ -21,7 +26,7 @@ class ArticleList extends Component {
 
     const { articles, toggleOpenItem, openItemId } = this.props
     const articleItems = articles.map((article) => (
-      <li key={article.id}>
+      <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
           isOpen={article.id === openItemId}

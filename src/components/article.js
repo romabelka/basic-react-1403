@@ -7,21 +7,23 @@ function Article({ isOpen, article, onBtnClick }) {
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
-      <button onClick={onBtnClick}>{text}</button>
+      <button onClick={onBtnClick} className="test--article__btn">
+        {text}
+      </button>
       {getBody({ isOpen, article })}
     </div>
   )
 }
 
 function setContainerRef(element) {
-  console.log('---', element)
+  //  console.log('---', element)
 }
 
 function getBody({ isOpen, article }) {
   if (!isOpen) return null
 
   return (
-    <section>
+    <section className="test--article__body">
       {article.text}
       <CommentList comments={article.comments} />
     </section>
