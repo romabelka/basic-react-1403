@@ -17,17 +17,18 @@ function CommentList({ comments }) {
 function getBody({ comments, isOpen }) {
   if (!isOpen) return null
 
-  const body = comments.length ? (
-    <ul>
-      {comments.map((comment) => (
-        <li key={comment.id}>
-          <Comment comment={comment} />
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <h3>No comments yet</h3>
-  )
+  const body =
+    comments && comments.length ? (
+      <ul>
+        {comments.map((comment) => (
+          <li key={comment.id}>
+            <Comment comment={comment} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <h3>No comments yet</h3>
+    )
 
   return <div>{body}</div>
 }
@@ -35,5 +36,12 @@ function getBody({ comments, isOpen }) {
 CommentList.propTypes = {
   comments: PropTypes.array.isRequired
 }
+
+/*
+CommentList.defaultProps = {
+  comments: [],
+  defaultOpen: true
+}
+*/
 
 export default CommentList
