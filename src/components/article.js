@@ -1,4 +1,5 @@
 import React from 'react'
+import CommentListHooks from './Comments/comment-list-decorators'
 
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
@@ -13,7 +14,13 @@ function Article({ isOpen, article, onBtnClick }) {
 
 function getBody({ isOpen, article }) {
   if (!isOpen) return null
-  return <section>{article.text}</section>
+
+  return (
+    <section>
+      {article.text}
+      <CommentListHooks comments={article.comments} />
+    </section>
+  )
 }
 
 export default Article
