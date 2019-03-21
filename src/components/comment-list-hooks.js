@@ -23,7 +23,7 @@ function CommentList({ comments }) {
 
   return (
     <div>
-      <button onClick={toggleExpansion()}>{isExpanded ? 'hide comments' : 'show comments'}</button>
+      <button onClick={toggleExpansion}>{isExpanded ? 'hide comments' : 'show comments'}</button>
       {getComments()}
     </div>
   )

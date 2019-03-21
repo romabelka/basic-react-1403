@@ -6,7 +6,7 @@ export default (FoldableComponent) =>
       isExpanded: false
     }
 
-    toggleExpansion = () => () => {
+    toggleExpansion = () => {
       this.setState({ isExpanded: !this.state.isExpanded })
     }
 
