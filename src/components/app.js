@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import RangeDatePicker from './range-date-picker'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -29,6 +30,7 @@ function App({ articles }) {
         }}
       />
       <Select value={selected} onChange={setSelected} options={options} isMulti />
+      <RangeDatePicker />
       <ArticleList articles={articles} />
     </>
   )
