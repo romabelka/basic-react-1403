@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CommentList from './comment-list-hooks'
 
 function Article({ isOpen, article, onBtnClick }) {
@@ -21,6 +22,14 @@ function getBody({ isOpen, article }) {
       <CommentList comments={article.comments} />
     </section>
   )
+}
+
+Article.propTypes = {
+  article: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string
+  })
 }
 
 export default Article
