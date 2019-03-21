@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import Select from 'react-select'
+import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
+import Filters from './filters'
+import ArticlesChart from './articles-chart'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
-  const [selected, setSelected] = useState()
 
   const handleUserChange = (ev) => {
     const { value } = ev.target
     setUsername(value.length < 10 ? value : '')
   }
-
-  const options = articles.map((article) => ({
-    label: article.title,
-    value: article.id
-  }))
 
   return (
     <>
@@ -28,10 +24,15 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
-      <Select value={selected} onChange={setSelected} options={options} isMulti />
-      <ArticleList articles={articles} />
+      <ArticlesChart article={articles} />
+      <Filters articles={articles} />
+      <ArticleList articles={articles} ref={setArticlesRef} />
     </>
   )
+}
+
+function setArticlesRef(ref) {
+  console.log('---', ref, findDOMNode(ref))
 }
 
 App.propTypes = {}

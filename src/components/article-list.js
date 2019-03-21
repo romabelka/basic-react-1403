@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './article'
-import useAccordion from '../custom-hooks/accordion'
+import accordion from '../decorators/accordion'
 
-function ArticleList({ articles }) {
-  const { openItemId, toggleOpenItem } = useAccordion()
+export class ArticleList extends Component {
+  static propTypes = {
+    articles: PropTypes.array.isRequired
+  }
 
-  const articleItems = articles.map((article) => (
-    <li key={article.id}>
-      <Article
-        article={article}
-        isOpen={article.id === openItemId}
-        onBtnClick={toggleOpenItem(article.id)}
-      />
-    </li>
-  ))
+  state = {
+    error: null
+  }
 
-  return <ul>{articleItems}</ul>
+  componentDidMount() {
+    const { fetchAll } = this.props
+    fetchAll && fetchAll()
+  }
+
+  componentDidCatch(error) {
+    this.setState({ error })
+  }
+
+  render() {
+    if (this.state.error) return <h2>OOooops</h2>
+
+    const { articles, toggleOpenItem, openItemId } = this.props
+    const articleItems = articles.map((article) => (
+      <li key={article.id} className="test--article-list__item">
+        <Article
+          article={article}
+          isOpen={article.id === openItemId}
+          onBtnClick={toggleOpenItem(article.id)}
+        />
+      </li>
+    ))
+
+    return <ul>{articleItems}</ul>
+  }
 }
 
-export default ArticleList
+export default accordion(ArticleList)
