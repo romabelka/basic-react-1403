@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import ArticleList from './article-list'
+import Calendar from './calendar'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -19,6 +20,7 @@ function App({ articles }) {
   return (
     <>
       <h1>Article App</h1>
+      <Calendar />
       Username:{' '}
       <input
         type="text"
