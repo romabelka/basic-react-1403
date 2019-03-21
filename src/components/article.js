@@ -5,12 +5,16 @@ import CommentList from './comment-list-hooks'
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
-    <div>
+    <div ref={setContainerRef}>
       <h3>{article.title}</h3>
       <button onClick={onBtnClick}>{text}</button>
       {getBody({ isOpen, article })}
     </div>
   )
+}
+
+function setContainerRef(element) {
+  console.log('---', element)
 }
 
 function getBody({ isOpen, article }) {

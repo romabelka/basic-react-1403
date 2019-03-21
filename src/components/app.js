@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ArticleList from './article-list'
 import Filters from './filters'
+import ArticlesChart from './articles-chart'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -22,6 +23,7 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
+      <ArticlesChart article={articles} />
       <Filters articles={articles} />
       <ArticleList articles={articles} />
     </>
