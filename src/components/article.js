@@ -34,7 +34,8 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string
+    text: PropTypes.string,
+    comments: PropTypes.array
   })
 }
 
