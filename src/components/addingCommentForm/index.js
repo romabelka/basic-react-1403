@@ -9,6 +9,7 @@ export default function AddingCommentForm() {
       <h3>Форма добавления комментария:</h3>
       <SingleTextInput className="form__item" placeholder="Ваше имя" name="user" />
       <SingleTextarea className="form__item" placeholder="Сообщение" name="message" />
+      <input type="button" value="Комментировать" style={{ 'margin-top': '0.5rem' }} />
     </form>
   )
 }
