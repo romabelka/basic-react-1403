@@ -39,7 +39,7 @@ function CommentAdd() {
       <input type="text" value={user} onChange={handleUserChange} style={{ ...formItemStyle }} />
       <input type="text" value={text} onChange={handleTextChange} style={{ ...formItemStyle }} />
       <button onClick={onSubmit} style={{ ...formItemStyle }}>
-        Add Comment
+        add Comment
       </button>
       <div
         style={{
@@ -54,5 +54,7 @@ function CommentAdd() {
     </div>
   )
 }
+
+CommentAdd.propTypes = {}
 
 export default CommentAdd
