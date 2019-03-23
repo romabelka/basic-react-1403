@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import commentFormInputHook from '../../custom-hooks/commentFormInput'
+import PropTypes from 'prop-types'
+import TextInput from './textInput'
 
 export default function Textarea({ className, placeholder, validation }) {
   const [text, handleInputChange] = commentFormInputHook()
@@ -18,4 +20,9 @@ export default function Textarea({ className, placeholder, validation }) {
       style={{ color: isValid ? 'black' : 'red' }}
     />
   )
+}
+
+TextInput.propTypes = {
+  validation: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired
 }

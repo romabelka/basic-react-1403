@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SingleTextInput from './textInput'
 import SingleTextarea from './textarea'
 import SubmitBtn from './submit'
