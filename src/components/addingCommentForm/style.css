@@ -1,0 +1,7 @@
+.form__item {
+  display: block;
+  margin-top: 0.5rem;
+}
+.fail {
+  color: red;
+}
