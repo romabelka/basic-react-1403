@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 export default function commentFormInputHook() {
-  const [text, setUsername] = useState('')
+  const [state, setState] = useState('')
 
   const handleInputChange = (ent) => {
     let { value } = ent.target
-    setUsername(value)
+    setState(value)
   }
-  return [text, handleInputChange]
+  return [state, handleInputChange]
 }

@@ -2,18 +2,13 @@ import React, { useState } from 'react'
 import SingleTextInput from './textInput'
 import SingleTextarea from './textarea'
 import SubmitBtn from './submit'
+import commentFormValidationHook from '../../custom-hooks/commentFormValidationHook'
 import './style.css'
 
 export default function AddingCommentForm() {
-  const [textInputIsValid, setInputState] = useState(false)
-  const setTextInputValidity = (isValid) => {
-    setInputState(isValid)
-  }
+  const [textInputIsValid, setTextInputValidity] = commentFormValidationHook()
 
-  const [textAreaIsValid, setTextareaState] = useState(true)
-  const setTextareaValidity = (isValid) => {
-    setTextareaState(isValid)
-  }
+  const [textAreaIsValid, setTextareaValidity] = commentFormValidationHook()
 
   const formIsValid = textInputIsValid && textAreaIsValid
 
