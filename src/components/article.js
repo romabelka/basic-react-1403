@@ -25,17 +25,19 @@ function getBody({ isOpen, article }) {
   return (
     <section className="test--article__body">
       {article.text}
-      <CommentList comments={article.comments} />
+      {article.comments && <CommentList comments={article.comments} />}
     </section>
   )
 }
 
 Article.propTypes = {
+  isOpen: PropTypes.bool,
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string
-  })
+  }),
+  onBtnClick: PropTypes.func
 }
 
 export default Article
