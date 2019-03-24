@@ -24,7 +24,7 @@ function getBody({ isOpen, article }) {
 
   return (
     <section className="test--article__body">
-      {article.text}
+      <div>{article.text}</div>
       <CommentList comments={article.comments} />
     </section>
   )
