@@ -7,7 +7,7 @@ export class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired,
     toggleOpenItem: PropTypes.func.isRequired,
-    openItemId: PropTypes.number
+    openItemId: PropTypes.string
   }
 
   state = {

@@ -37,7 +37,7 @@ Article.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string
   }).isRequired,
-  onBtnClick: PropTypes.func.isRequired
+  onBtnClick: PropTypes.func
 }
 
 export default Article
