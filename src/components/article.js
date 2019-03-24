@@ -5,7 +5,7 @@ import CommentList from './comment-list-hooks'
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
-    <div ref={setContainerRef}>
+    <div ref={setContainerRef} className="test--article__container">
       <h3>{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
@@ -34,7 +34,8 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string
+    text: PropTypes.string,
+    comments: PropTypes.array
   })
 }
 
