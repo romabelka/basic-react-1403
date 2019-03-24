@@ -1,0 +1,15 @@
+:local(form) {
+  margin-top: 15px;
+  padding-left: 40px;
+}
+
+:local(.field) {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin-bottom: 15px;
+}
+
+:local(.hasError) {
+  border-color: red;
+}

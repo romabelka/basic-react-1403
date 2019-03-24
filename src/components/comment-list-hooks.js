@@ -1,13 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { array } from 'prop-types'
 import Comment from './comment'
+import CommentForm from './comments-form'
 import useToggler from '../custom-hooks/toggle-open'
 
 function CommentList({ comments }) {
   const { isOpen, toggleOpen } = useToggler()
   const text = isOpen ? 'hide comments' : 'show comments'
+
   return (
-    <div>
+    <div className="comments-list">
       <button onClick={toggleOpen}>{text}</button>
       {getBody({ comments, isOpen })}
     </div>
@@ -21,7 +23,7 @@ function getBody({ comments, isOpen }) {
     comments && comments.length ? (
       <ul>
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li key={comment.id} className="comment-list__item">
             <Comment comment={comment} />
           </li>
         ))}
@@ -30,11 +32,16 @@ function getBody({ comments, isOpen }) {
       <h3>No comments yet</h3>
     )
 
-  return <div>{body}</div>
+  return (
+    <div>
+      {body}
+      <CommentForm />
+    </div>
+  )
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: array.isRequired
 }
 
 /*
