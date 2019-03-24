@@ -7,17 +7,13 @@ import articles from '../fixtures'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('Article', () => {
-  /*it('should render article body', () => {
-        const container = render(<Article isOpen={true} onBtnClick ={} article={articles[0]} />)
-        expect(container.find('.test--article__body').length).toBe(1)
-    })*/
-  /*it('should show comments on click', () => {
-        const {comments} = articles[0];
-        const container = mount(<CommentList comments={comments} />)
-        container
-            .find('.test--comments__btn')
-            .at(0)
-            .simulate('click')
-        expect(container.find('.test--comment-list__item').length).toBe(comments.length)
-    })*/
+  it('should render opened article', () => {
+    const container = render(<Article isOpen={true} onBtnClick={() => {}} article={articles[0]} />)
+    expect(container.find('.test--article__body').length).toBe(1)
+  })
+
+  it('should render closed article', () => {
+    const container = render(<Article isOpen={false} onBtnClick={() => {}} article={articles[0]} />)
+    expect(container.find('.test--article__body').length).toBe(0)
+  })
 })
