@@ -31,11 +31,13 @@ function getBody({ isOpen, article }) {
 }
 
 Article.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string
-  })
+  }).isRequired,
+  onBtnClick: PropTypes.func
 }
 
 export default Article

@@ -2,13 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
+import CommentAdd from '../components/comment-add'
 
 function CommentList({ comments }) {
   const { isOpen, toggleOpen } = useToggler()
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <CommentAdd />
+      <button onClick={toggleOpen} className="test--comments__show-button">
+        {text}
+      </button>
       {getBody({ comments, isOpen })}
     </div>
   )
@@ -19,9 +23,9 @@ function getBody({ comments, isOpen }) {
 
   const body =
     comments && comments.length ? (
-      <ul>
+      <ul className="test--comments__body">
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li key={comment.id} className="test--comment__item">
             <Comment comment={comment} />
           </li>
         ))}

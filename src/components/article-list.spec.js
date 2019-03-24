@@ -8,19 +8,25 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('ArticleList', () => {
   it('should render a list', () => {
-    const container = shallow(<ArticleList articles={articles} toggleOpenItem={() => {}} />)
+    const container = shallow(
+      <ArticleList articles={articles} toggleOpenItem={() => {}} onBtnClick={() => {}} />
+    )
 
     expect(container.find('.test--article-list__item').length).toBe(articles.length)
   })
 
   it('should render all articles closed', () => {
-    const container = render(<DecoratedArticleList articles={articles} />)
+    const container = render(
+      <DecoratedArticleList articles={articles} toggleOpenItem={() => {}} onBtnClick={() => {}} />
+    )
 
     expect(container.find('.test--article__body').length).toBe(0)
   })
 
   it('should open article on click', () => {
-    const container = mount(<DecoratedArticleList articles={articles} />)
+    const container = mount(
+      <DecoratedArticleList articles={articles} toggleOpenItem={() => {}} onBtnClick={() => {}} />
+    )
 
     container
       .find('.test--article__btn')
@@ -32,7 +38,9 @@ describe('ArticleList', () => {
 
   it('should fetch all articles', () => {
     const fn = jest.fn()
-    mount(<ArticleList articles={[]} fetchAll={fn} />)
+    mount(
+      <ArticleList articles={[]} toggleOpenItem={() => {}} onBtnClick={() => {}} fetchAll={fn} />
+    )
 
     expect(fn.mock.calls.length).toBe(1)
   })
