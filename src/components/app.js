@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
 import ArticlesChart from './articles-chart'
+import PropTypes from 'prop-types'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -35,6 +36,8 @@ function setArticlesRef(ref) {
   console.log('---', ref, findDOMNode(ref))
 }
 
-App.propTypes = {}
+App.propTypes = {
+  articles: PropTypes.array.isRequired
+}
 
 export default App
