@@ -10,7 +10,6 @@ function CommentList({ comments }) {
   const [commentList, setComments] = useState(comments)
 
   const addComment = (commentList, setComments) => (user, text) => {
-    console.log(`Comments list: ${JSON.stringify(commentList)}`)
     const newComment = { id: uuid(), user, text }
     if (commentList && commentList.length) {
       setComments([...commentList, newComment])
