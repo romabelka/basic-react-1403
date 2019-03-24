@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import pt from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
@@ -35,6 +36,6 @@ function setArticlesRef(ref) {
   console.log('---', ref, findDOMNode(ref))
 }
 
-App.propTypes = {}
+App.propTypes = { articles: pt.array.isRequired }
 
 export default App
