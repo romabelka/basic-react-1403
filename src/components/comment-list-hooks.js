@@ -1,15 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
+import CommentAdd from './forms/comment-add'
 
 function CommentList({ comments }) {
   const { isOpen, toggleOpen } = useToggler()
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <button onClick={toggleOpen} className="test--comment-list__btn">
+        {text}
+      </button>
       {getBody({ comments, isOpen })}
+      <CommentAdd />
     </div>
   )
 }

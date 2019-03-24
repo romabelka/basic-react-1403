@@ -5,8 +5,8 @@ import CommentList from './comment-list-hooks'
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
-    <div ref={setContainerRef}>
-      <h3>{article.title}</h3>
+    <div ref={setContainerRef} className="test--article__container">
+      <h3 className="test--article__title">{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
       </button>
@@ -24,7 +24,7 @@ function getBody({ isOpen, article }) {
 
   return (
     <section className="test--article__body">
-      {article.text}
+      <div className="test--article__text">{article.text}</div>
       <CommentList comments={article.comments} />
     </section>
   )
