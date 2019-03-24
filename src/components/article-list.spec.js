@@ -36,4 +36,5 @@ describe('ArticleList', () => {
 
     expect(fn.mock.calls.length).toBe(1)
   })
+
 })
