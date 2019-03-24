@@ -34,8 +34,11 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string
-  })
+    text: PropTypes.string,
+    comments: PropTypes.array
+  }).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onBtnClick: PropTypes.func.isRequired
 }
 
 export default Article

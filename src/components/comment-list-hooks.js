@@ -45,11 +45,4 @@ CommentList.propTypes = {
   comments: PropTypes.array.isRequired
 }
 
-/*
-CommentList.defaultProps = {
-  comments: [],
-  defaultOpen: true
-}
-*/
-
 export default CommentList
