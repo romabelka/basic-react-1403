@@ -71,7 +71,7 @@ export default class AddComment extends Component {
 
   render() {
     return (
-      <form className="add-comment-form" style={{ margin: '15px 15px', width: '600px' }}>
+      <form className="test--add-comment__form" style={{ margin: '15px 15px', width: '600px' }}>
         <div style={formControlStyle}>
           <label htmlFor="username">Username:</label>
           <input

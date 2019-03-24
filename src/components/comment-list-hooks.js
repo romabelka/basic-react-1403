@@ -9,7 +9,9 @@ function CommentList({ comments }) {
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <button onClick={toggleOpen} className="test--toggle-comments__btn">
+        {text}
+      </button>
       {getBody({ comments, isOpen })}
     </div>
   )
@@ -22,7 +24,7 @@ function getBody({ comments, isOpen }) {
     comments && comments.length ? (
       <ul>
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li key={comment.id} className="test--comment-list__item">
             <Comment comment={comment} />
           </li>
         ))}
@@ -33,7 +35,7 @@ function getBody({ comments, isOpen }) {
 
   return (
     <>
-      <div>{body}</div>
+      <div className="test--comment-list__body">{body}</div>
       <AddComment />
     </>
   )
