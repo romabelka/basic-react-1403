@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
+import AddComment from './add-comment/add-comment'
+import uuid from 'uuid/v1'
 
 function CommentList({ comments }) {
   const { isOpen, toggleOpen } = useToggler()
+  const [commentList, setComments] = useState(comments)
+
+  const addComment = (commentList, setComments) => (user, text) => {
+    console.log(`Comments list: ${JSON.stringify(commentList)}`)
+    const newComment = { id: uuid(), user, text }
+    if (commentList && commentList.length) {
+      setComments([...commentList, newComment])
+    } else {
+      setComments([newComment])
+    }
+  }
+
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
       <button onClick={toggleOpen}>{text}</button>
-      {getBody({ comments, isOpen })}
+      <AddComment addComment={addComment(commentList, setComments)} />
+      {getBody({ comments: commentList, isOpen })}
     </div>
   )
 }
