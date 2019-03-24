@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
+import AddComment from './add-comment'
 
 function CommentList({ comments }) {
   const { isOpen, toggleOpen } = useToggler()
@@ -30,11 +31,16 @@ function getBody({ comments, isOpen }) {
       <h3>No comments yet</h3>
     )
 
-  return <div>{body}</div>
+  return (
+    <>
+      <div>{body}</div>
+      <AddComment />
+    </>
+  )
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.array
 }
 
 /*
