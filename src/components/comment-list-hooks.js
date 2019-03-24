@@ -9,7 +9,9 @@ function CommentList({ comments }) {
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <button data-toggle-comments onClick={toggleOpen}>
+        {text}
+      </button>
       {getBody({ comments, isOpen })}
     </div>
   )
@@ -32,7 +34,7 @@ function getBody({ comments, isOpen }) {
     )
 
   return (
-    <div>
+    <div data-comments-list>
       {body}
       <AddComment />
     </div>
