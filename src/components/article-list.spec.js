@@ -9,13 +9,11 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('ArticleList', () => {
   it('should render a list', () => {
     const container = shallow(<ArticleList articles={articles} toggleOpenItem={() => {}} />)
-
     expect(container.find('.test--article-list__item').length).toBe(articles.length)
   })
 
   it('should render all articles closed', () => {
     const container = render(<DecoratedArticleList articles={articles} />)
-
     expect(container.find('.test--article__body').length).toBe(0)
   })
 

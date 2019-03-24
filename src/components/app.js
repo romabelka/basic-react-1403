@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
 import ArticlesChart from './articles-chart'
 
-function App({ articles }) {
+function App(props) {
+  const { articles } = props
   const [username, setUsername] = useState('Roma')
 
   const handleUserChange = (ev) => {
@@ -35,6 +37,8 @@ function setArticlesRef(ref) {
   console.log('---', ref, findDOMNode(ref))
 }
 
-App.propTypes = {}
+App.propTypes = {
+  articles: PropTypes.array.isRequired
+}
 
 export default App
