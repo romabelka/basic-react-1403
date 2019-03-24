@@ -8,7 +8,7 @@ function CommentList({ comments }) {
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <button className="test--commentList__btn" onClick={toggleOpen}>{text}</button>
       {getBody({ comments, isOpen })}
     </div>
   )

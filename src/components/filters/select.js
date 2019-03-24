@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-import Comment from '../comment'
 
 function SelectFilter({ articles }) {
   const [selected, setSelection] = useState(null)

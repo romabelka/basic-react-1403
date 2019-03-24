@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './comment-list-hooks'
+import accordion from '../decorators/accordion'
 
-function Article({ isOpen, article, onBtnClick }) {
+export function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
@@ -25,7 +26,7 @@ function getBody({ isOpen, article }) {
   return (
     <section className="test--article__body">
       {article.text}
-      <CommentList comments={article.comments} />
+      <CommentList comments={article.comments} className="test--article__commentList"/>
     </section>
   )
 }
@@ -38,4 +39,4 @@ Article.propTypes = {
   })
 }
 
-export default Article
+export default accordion(Article);
