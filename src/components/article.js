@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './comment-list-hooks'
 
-function Article({ isOpen, article, onBtnClick }) {
+function Article(props) {
+  const { isOpen, article, onBtnClick } = props
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>

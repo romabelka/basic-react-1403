@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 
-function CommentList({ comments }) {
+function CommentList(props) {
   const { isOpen, toggleOpen } = useToggler()
+  const { comments } = props
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
