@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
+import CommentForm from './comment-form/comment-field'
 
 function CommentList(props) {
   const { isOpen, toggleOpen } = useToggler()
@@ -20,13 +21,16 @@ function getBody({ comments, isOpen }) {
 
   const body =
     comments && comments.length ? (
-      <ul>
-        {comments.map((comment) => (
-          <li key={comment.id}>
-            <Comment comment={comment} />
-          </li>
-        ))}
-      </ul>
+      <React.Fragment>
+        <ul>
+          {comments.map((comment) => (
+            <li key={comment.id}>
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+        <CommentForm />
+      </React.Fragment>
     ) : (
       <h3>No comments yet</h3>
     )

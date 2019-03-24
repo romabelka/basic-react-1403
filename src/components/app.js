@@ -38,7 +38,7 @@ function setArticlesRef(ref) {
 }
 
 App.propTypes = {
-  articles: PropTypes.shape({})
+  articles: PropTypes.array.isRequired
 }
 
 export default App
