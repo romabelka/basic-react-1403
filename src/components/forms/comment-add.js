@@ -5,24 +5,19 @@ function CommentAdd() {
 
   const [comment, setComment] = useState('')
   const [username, setUsername] = useState('')
-  const [userValidationResult, setUserValidation] = useState(defaultValidationResult)
-  const [commentValidationResult, setCommentValidation] = useState(defaultValidationResult)
 
-  const validate = (val, setValidationResultFunc) => {
-    const validationResult = val ? defaultValidationResult : { backgroundColor: 'orange' }
-    setValidationResultFunc(validationResult)
+  const validate = (val) => {
+    return val ? defaultValidationResult : { backgroundColor: 'orange' }
   }
 
   const handleUserChange = (ev) => {
     const { value } = ev.target
     setUsername(value)
-    validate(value, setUserValidation)
   }
 
   const handleCommentChange = (ev) => {
     const { value } = ev.target
     setComment(value)
-    validate(value, setCommentValidation)
   }
 
   const addCommentBtnEnabled = () => {
@@ -38,7 +33,7 @@ function CommentAdd() {
           type="text"
           value={username}
           onChange={handleUserChange}
-          style={userValidationResult}
+          style={validate(username)}
         />
       </div>
       <div>
@@ -49,7 +44,7 @@ function CommentAdd() {
           cols={40}
           rows={5}
           onChange={handleCommentChange}
-          style={commentValidationResult}
+          style={validate(comment)}
         />
       </div>
       <div>
