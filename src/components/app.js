@@ -5,7 +5,7 @@ import Filters from './filters'
 import ArticlesChart from './articles-chart'
 
 function App({ articles }) {
-  const [username, setUsername] = useState('Roma')
+  const [username, setUsername] = useState('Anatoliy')
 
   const handleUserChange = (ev) => {
     const { value } = ev.target
