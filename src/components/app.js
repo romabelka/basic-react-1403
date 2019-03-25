@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
-import ArticlesChart from './articles-chart'
 import Counter from './counter'
 
-function App({ articles }) {
+function App() {
   const [username, setUsername] = useState('Roma')
 
   const handleUserChange = (ev) => {
@@ -26,15 +24,10 @@ function App({ articles }) {
         }}
       />
       <Counter />
-      <ArticlesChart article={articles} />
-      <Filters articles={articles} />
-      <ArticleList articles={articles} ref={setArticlesRef} />
+      <Filters articles={[]} />
+      <ArticleList />
     </>
   )
-}
-
-function setArticlesRef(ref) {
-  console.log('---', ref, findDOMNode(ref))
 }
 
 App.propTypes = {}
