@@ -3,21 +3,17 @@ import React, { useState } from 'react'
 function AddComment() {
   const [username, setUsername] = useState('')
   const [message, setMessage] = useState('')
-  const [isUsernameValid, setUsernameValidation] = useState()
-  const [isMessageValid, setMessageValidation] = useState()
 
   function handlerUserChange(ev) {
     const { value } = ev.target
 
     setUsername(value)
-    setUsernameValidation(value.length && value.length > 3)
   }
 
   function handlerTextChange(ev) {
     const { value } = ev.target
 
     setMessage(value)
-    setMessageValidation(value.length && value.length > 10)
   }
 
   return (
@@ -27,8 +23,8 @@ function AddComment() {
         value={username}
         onChange={handlerUserChange}
         style={{
-          color: !isUsernameValid && 'red',
-          borderColor: !isUsernameValid && 'red'
+          color: username.length && username.length < 3 && 'red',
+          borderColor: username.length && username.length < 3 && 'red'
         }}
       />
       <textarea
@@ -37,8 +33,8 @@ function AddComment() {
         rows="4"
         onChange={handlerTextChange}
         style={{
-          color: !isUsernameValid && 'red',
-          borderColor: !isMessageValid && 'red'
+          color: message.length && message.length < 10 && 'red',
+          borderColor: message.length && message.length < 10 && 'red'
         }}
       />
       <button>add comment</button>
