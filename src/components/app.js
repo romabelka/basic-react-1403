@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
 import ArticlesChart from './articles-chart'
+import Counter from './counter'
 
 function App({ articles }) {
   const [username, setUsername] = useState('Roma')
@@ -24,6 +25,7 @@ function App({ articles }) {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
+      <Counter />
       <ArticlesChart article={articles} />
       <Filters articles={articles} />
       <ArticleList articles={articles} ref={setArticlesRef} />
