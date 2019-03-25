@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CommentList from './comment-list-hooks'
+import CommentList from './comment-list'
 
 function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
