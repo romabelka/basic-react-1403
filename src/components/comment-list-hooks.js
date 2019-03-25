@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
+import AddComment from './add-comment'
 import useToggler from '../custom-hooks/toggle-open'
 
 function CommentList({ comments }) {
@@ -8,7 +9,9 @@ function CommentList({ comments }) {
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
-      <button onClick={toggleOpen}>{text}</button>
+      <button data-toggle-comments onClick={toggleOpen}>
+        {text}
+      </button>
       {getBody({ comments, isOpen })}
     </div>
   )
@@ -30,7 +33,12 @@ function getBody({ comments, isOpen }) {
       <h3>No comments yet</h3>
     )
 
-  return <div>{body}</div>
+  return (
+    <div data-comments-list>
+      {body}
+      <AddComment />
+    </div>
+  )
 }
 
 CommentList.propTypes = {

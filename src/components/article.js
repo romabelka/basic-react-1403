@@ -6,7 +6,7 @@ function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
-      <h3>{article.title}</h3>
+      <h3 data-article-title>{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
       </button>
@@ -25,17 +25,19 @@ function getBody({ isOpen, article }) {
   return (
     <section className="test--article__body">
       {article.text}
-      <CommentList comments={article.comments} />
+      {article.comments && <CommentList comments={article.comments} />}
     </section>
   )
 }
 
 Article.propTypes = {
+  isOpen: PropTypes.bool,
   article: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string
-  })
+  }),
+  onBtnClick: PropTypes.func
 }
 
 export default Article
