@@ -27,7 +27,7 @@ describe('Article', () => {
     articles.forEach((article) => {
       const container = render(<Article article={articles[0]} />)
 
-      expect(container.find('h3').text()).toBe(articles[0].title)
+      expect(container.find('[data-article-title]').text()).toBe(articles[0].title)
     })
   })
 })

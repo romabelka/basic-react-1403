@@ -6,7 +6,7 @@ function Article({ isOpen, article, onBtnClick }) {
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
-      <h3>{article.title}</h3>
+      <h3 data-article-title>{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
       </button>
