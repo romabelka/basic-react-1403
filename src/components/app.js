@@ -24,7 +24,7 @@ function App() {
         }}
       />
       <Counter />
-      <Filters articles={[]} />
+      <Filters />
       <ArticleList />
     </>
   )
