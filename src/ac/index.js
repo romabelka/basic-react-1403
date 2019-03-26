@@ -9,7 +9,7 @@ export const deleteArticle = (id) => ({
   payload: { id }
 })
 
-export const filterArticle = (id) => ({
+export const filterArticle = (obj) => ({
   type: FILTER_ARTICLE,
-  payload: { id }
+  payload: obj
 })
