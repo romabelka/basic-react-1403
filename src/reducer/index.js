@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux'
 import counterReducer from './counter'
-import { filterChangeDateFromReducer, filterChangeDateToReducer, changeSelectedIds } from './filter'
+import {
+  filterChangeDateFromReducer,
+  filterChangeDateToReducer,
+  changeSelectedArticles
+} from './filter'
 import articles from './articles'
 
 export default combineReducers({
   counter: counterReducer,
   articles,
-  filterArticlesIds: changeSelectedIds,
+  filterArticlesIds: changeSelectedArticles,
   filterDateFrom: filterChangeDateFromReducer,
   filterDateTo: filterChangeDateToReducer
 })

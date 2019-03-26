@@ -1,4 +1,8 @@
-import { CHANGE_FILTER_DATE_FROM, CHANGE_FILTER_DATE_TO, CHANGE_SELECTED_IDS } from '../constants'
+import {
+  CHANGE_FILTER_DATE_FROM,
+  CHANGE_FILTER_DATE_TO,
+  CHANGE_SELECTED_ARTICLES
+} from '../constants'
 
 export const filterChangeDateFromReducer = (filterState = null, action) => {
   const { type, payload } = action
@@ -22,11 +26,11 @@ export const filterChangeDateToReducer = (filterState = null, action) => {
   }
 }
 
-export const changeSelectedIds = (filterState = [], action) => {
+export const changeSelectedArticles = (filterState = [], action) => {
   const { type, payload } = action
   switch (type) {
-    case CHANGE_SELECTED_IDS:
-      return payload.ids
+    case CHANGE_SELECTED_ARTICLES:
+      return payload.values
 
     default:
       return filterState
