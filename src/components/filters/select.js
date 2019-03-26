@@ -1,23 +1,19 @@
 import React from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
-import { changeSelectedArticles } from '../../ac'
+import { changeSelectedArticlesIds } from '../../ac'
 
-function SelectFilter({ articles, filterArticlesIds }) {
+function SelectFilter({ articles, filterArticlesIds, changeSelectedArticlesIds }) {
   const options = articles.map((article) => ({
     label: article.title,
     value: article.id
   }))
 
-  return (
-    <Select
-      options={options}
-      onChange={(selectedOptions) => {
-        changeSelectedArticles(selectedOptions)
-      }}
-      isMulti
-    />
-  )
+  const handleChange = (selectedOptions) => {
+    changeSelectedArticlesIds(selectedOptions)
+  }
+
+  return <Select options={options} value={filterArticlesIds} onChange={handleChange} isMulti />
 }
 
 export default connect(
@@ -25,5 +21,5 @@ export default connect(
     articles: state.articles,
     filterArticlesIds: state.filterArticlesIds
   }),
-  { changeSelectedArticles }
+  { changeSelectedArticlesIds }
 )(SelectFilter)
