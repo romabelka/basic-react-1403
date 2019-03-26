@@ -47,5 +47,6 @@ export class ArticleList extends Component {
 
 
 export default connect((state) => ({
-  articles: state.filteredArticles ? state.filteredArticles.length != 0 ? state.filteredArticles : state.articles : state.articles
+  articles: state.filteredArticles ? state.filteredArticles.length != 0 ? state.filteredArticles : state.articles : state.articles,
+  notUsable: state.currentRange
 }))(accordion(ArticleList))
