@@ -29,8 +29,13 @@ export class ArticleList extends Component {
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
+    const { articles, toggleOpenItem, openItemId, selected } = this.props
+    const selectedArticles =
+      selected.length > 0
+        ? articles.filter((article) => selected.some((e) => e.value === article.id))
+        : articles
+
+    const articleItems = selectedArticles.map((article) => (
       <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
@@ -45,5 +50,6 @@ export class ArticleList extends Component {
 }
 
 export default connect((state) => ({
-  articles: state.articles
+  articles: state.articles,
+  selected: state.selected
 }))(accordion(ArticleList))
