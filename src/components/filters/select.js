@@ -1,10 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
-import articles from '../../fixtures'
 import { selectArticles } from '../../ac'
 
-function SelectFilter({ selected, filterArticle, selectArticles }) {
+function SelectFilter({ selected, filterArticle, selectArticles, articles }) {
   const options = articles.map((article) => ({
     label: article.title,
     value: article.id
@@ -22,6 +21,8 @@ function SelectFilter({ selected, filterArticle, selectArticles }) {
   )
 }
 export default connect(
-  null,
+  (storeState) => ({
+    articles: storeState.articles
+  }),
   { selectArticles }
 )(SelectFilter)
