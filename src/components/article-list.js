@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Article from './article'
 import accordion from '../decorators/accordion'
 
-export class ArticleList extends Component {
+class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired,
     fetchAll: PropTypes.func,
@@ -44,6 +44,23 @@ export class ArticleList extends Component {
   }
 }
 
-export default connect((state) => ({
-  articles: state.articles
-}))(accordion(ArticleList))
+const mapStateToProps = (state) => {
+  const {
+    selected,
+    dateRange: { from, to }
+  } = state.filters
+
+  const filteredArticleItems = state.articles.filter((article) => {
+    const date = Date.parse(article.date)
+    const isSelectedByDayPicker = from && to && (date > from && date < to)
+    const isSelectedBySelect = selected.find((selected) => selected.value === article.id)
+
+    return (!selected.length || isSelectedBySelect) && (!from || !to || isSelectedByDayPicker)
+  })
+
+  return {
+    articles: filteredArticleItems
+  }
+}
+
+export default connect(mapStateToProps)(accordion(ArticleList))
