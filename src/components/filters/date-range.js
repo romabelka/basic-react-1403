@@ -1,25 +1,41 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DayPicker, { DateUtils } from 'react-day-picker'
+import { connect } from 'react-redux'
+import { changeDateRange } from '../../ac'
 
 import 'react-day-picker/lib/style.css'
 
-function DateRange() {
-  const [state, setState] = useState({ from: null, to: null })
+function DateRange({ fromDate, toDate, handleChangeDateRange }) {
+  const handleDayClick = (day) => {
+    const { from, to } = DateUtils.addDayToRange(day, { from: fromDate, to: toDate })
+    handleChangeDateRange(from, to)
+  }
 
-  const handleDayClick = (day) => setState(DateUtils.addDayToRange(day, state))
-
-  const { from, to } = state
-  const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
+  const selectedRange =
+    fromDate && toDate && `${fromDate.toDateString()} - ${toDate.toDateString()}`
 
   return (
     <div className="date-range">
       <DayPicker
-        selectedDays={(day) => DateUtils.isDayInRange(day, { from, to })}
+        selectedDays={(day) => DateUtils.isDayInRange(day, { from: fromDate, to: toDate })}
         onDayClick={handleDayClick}
+        initialMonth={new Date('2016-06-01')}
       />
       {selectedRange}
     </div>
   )
 }
 
-export default DateRange
+const mapStoreStateToProps = (storeState) => ({
+  fromDate: storeState.filter.dateRange.fromDate,
+  toDate: storeState.filter.dateRange.toDate
+})
+
+const mapDispatchToProps = {
+  handleChangeDateRange: changeDateRange
+}
+
+export default connect(
+  mapStoreStateToProps,
+  mapDispatchToProps
+)(DateRange)

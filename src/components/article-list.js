@@ -10,7 +10,8 @@ export class ArticleList extends Component {
     fetchAll: PropTypes.func,
     //from decorator
     openItemId: PropTypes.string,
-    toggleOpenItem: PropTypes.func
+    toggleOpenItem: PropTypes.func,
+    filter: PropTypes.object
   }
 
   state = {
@@ -26,11 +27,26 @@ export class ArticleList extends Component {
     this.setState({ error })
   }
 
+  filterArticles(articles, filter) {
+    var selectedIds = filter.selectedValues.map((val) => val.value)
+    return articles
+      .filter((article) => selectedIds.length === 0 || selectedIds.includes(article.id))
+      .filter((article) => {
+        const date = new Date(article.date)
+        return (
+          filter.dateRange.fromDate == null ||
+          filter.dateRange.toDate == null ||
+          (date >= filter.dateRange.fromDate && date <= filter.dateRange.toDate)
+        )
+      })
+  }
+
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
+    const { articles, toggleOpenItem, openItemId, filter } = this.props
+    const visibleArticles = this.filterArticles(articles, filter)
+    const articleItems = visibleArticles.map((article) => (
       <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
@@ -45,5 +61,6 @@ export class ArticleList extends Component {
 }
 
 export default connect((state) => ({
-  articles: state.articles
+  articles: state.articles,
+  filter: state.filter
 }))(accordion(ArticleList))
