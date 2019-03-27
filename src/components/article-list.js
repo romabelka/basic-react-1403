@@ -7,6 +7,8 @@ import accordion from '../decorators/accordion'
 export class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired,
+    dates: PropTypes.shape(),
+    selectValues: PropTypes.shape(),
     fetchAll: PropTypes.func,
     //from decorator
     openItemId: PropTypes.string,
@@ -26,11 +28,8 @@ export class ArticleList extends Component {
     this.setState({ error })
   }
 
-  render() {
-    if (this.state.error) return <h2>OOooops</h2>
-
-    const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
+  renderTemplateArticle = (article, toggleOpenItem, openItemId) => {
+    return (
       <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
@@ -38,12 +37,41 @@ export class ArticleList extends Component {
           onBtnClick={toggleOpenItem(article.id)}
         />
       </li>
-    ))
+    )
+  }
+
+  render() {
+    if (this.state.error) return <h2>OOooops</h2>
+
+    const { articles, toggleOpenItem, openItemId, dates, selectValues } = this.props
+
+    if (selectValues !== null) {
+      console.log(selectValues, 'selectValues')
+    }
+
+    const articleItems = articles.map((article) => {
+      if (dates === null) {
+        return this.renderTemplateArticle(article, toggleOpenItem, openItemId)
+      }
+
+      if (
+        Date.parse(article.date) > Date.parse(dates.from) &&
+        Date.parse(article.date) < Date.parse(dates.to)
+      ) {
+        return this.renderTemplateArticle(article, toggleOpenItem, openItemId)
+      }
+
+      return null
+    })
 
     return <ul>{articleItems}</ul>
   }
 }
 
-export default connect((state) => ({
-  articles: state.articles
-}))(accordion(ArticleList))
+export default connect((state) => {
+  return {
+    articles: state.articles,
+    dates: state.dates,
+    selectValues: state.selectValues
+  }
+})(accordion(ArticleList))

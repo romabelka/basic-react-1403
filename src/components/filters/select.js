@@ -1,15 +1,43 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Select from 'react-select'
+import { selectValues } from '../../ac'
 
-function SelectFilter({ articles }) {
-  const [selected, setSelection] = useState(null)
+class SelectFilter extends Component {
+  static propTypes = {
+    articles: PropTypes.array,
+    selectValues: PropTypes.func
+  }
 
-  const options = articles.map((article) => ({
-    label: article.title,
-    value: article.id
-  }))
+  handleChange = (values) => {
+    const commonValues = values.reduce((acc, curr) => {
+      acc.push(curr.label)
+      return acc
+    }, [])
 
-  return <Select options={options} value={selected} onChange={setSelection} isMulti />
+    this.props.selectValues(commonValues)
+  }
+
+  render() {
+    const options = this.props.articles.map((article) => ({
+      label: article.title,
+      value: article.id
+    }))
+
+    return <Select options={options} onChange={this.handleChange} isMulti />
+  }
 }
 
-export default SelectFilter
+const mapStateToProps = (state) => ({
+  articles: state.articles
+})
+
+const mapDispatchToProps = {
+  selectValues: selectValues
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectFilter)
