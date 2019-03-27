@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import articles from '../fixtures'
 import ArticleList from './article-list'
 import Filters from './filters'
 import Counter from './counter'
@@ -24,7 +25,7 @@ function App() {
         }}
       />
       <Counter />
-      <Filters articles={[]} />
+      <Filters articles={articles} />
       <ArticleList />
     </>
   )

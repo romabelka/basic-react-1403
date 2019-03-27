@@ -20,9 +20,9 @@ class Filters extends Component {
     )
   }
 }
-const mapStateToProps = (store) => ({ articles: store.articles })
+// const mapStateToProps = (store) => ({ articles: store.articles })
 
 export default connect(
-  mapStateToProps,
+  null,
   { filterArticle }
 )(Filters)
