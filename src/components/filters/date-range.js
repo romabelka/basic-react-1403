@@ -19,6 +19,7 @@ function DateRange({ fromDate, toDate, handleChangeDateRange }) {
       <DayPicker
         selectedDays={(day) => DateUtils.isDayInRange(day, { from: fromDate, to: toDate })}
         onDayClick={handleDayClick}
+        initialMonth={new Date('2016-06-01')}
       />
       {selectedRange}
     </div>
