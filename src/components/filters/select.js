@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
 import { selectArticle } from '../../ac'
@@ -15,7 +15,7 @@ function SelectFilter({ articles, selected, selectArticle }) {
 export default connect(
   (state) => ({
     articles: state.articles,
-    selected: state.selected
+    selected: state.filter.selected
   }),
   {
     selectArticle

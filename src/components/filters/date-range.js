@@ -24,7 +24,7 @@ function DateRange({ dateRange, selectDateRange }) {
 
 export default connect(
   (state) => ({
-    dateRange: state.dateRange
+    dateRange: state.filter.dateRange
   }),
   {
     selectDateRange

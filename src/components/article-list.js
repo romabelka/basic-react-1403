@@ -45,5 +45,28 @@ export class ArticleList extends Component {
 }
 
 export default connect((state) => ({
-  articles: state.articles
+  articles: (() => {
+    return state.articles
+      .filter((article) => {
+        return state.filter.selected.length
+          ? state.filter.selected.find((selectFilter) => selectFilter.value === article.id)
+          : true
+      })
+      .filter((article) => {
+        const { from, to } = state.filter.dateRange
+
+        if (from !== null && to !== null) {
+          return (
+            Date.parse(article.date) >= Date.parse(from) &&
+            Date.parse(article.date) <= Date.parse(to)
+          )
+        } else if (from !== null) {
+          return Date.parse(article.date) >= Date.parse(from)
+        } else if (to !== null) {
+          return Date.parse(article.date) <= Date.parse(to)
+        } else {
+          return true
+        }
+      })
+  })()
 }))(accordion(ArticleList))
