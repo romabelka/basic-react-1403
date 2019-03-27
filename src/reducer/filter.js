@@ -4,34 +4,30 @@ import {
   CHANGE_SELECTED_ARTICLES
 } from '../constants'
 
-export const filterChangeDateFromReducer = (filterState = null, action) => {
-  const { type, payload } = action
-  switch (type) {
-    case CHANGE_FILTER_DATE_FROM:
-      return payload.date
-
-    default:
-      return filterState
-  }
+const defaultState = {
+  dateFrom: null,
+  dateTo: null,
+  selectedArticles: []
 }
-
-export const filterChangeDateToReducer = (filterState = null, action) => {
+export default (filterState = defaultState, action) => {
   const { type, payload } = action
-  switch (type) {
-    case CHANGE_FILTER_DATE_TO:
-      return payload.date
 
-    default:
-      return filterState
-  }
-}
-
-export const changeSelectedArticles = (filterState = [], action) => {
-  const { type, payload } = action
   switch (type) {
     case CHANGE_SELECTED_ARTICLES:
-      return payload.values
-
+      return {
+        ...filterState,
+        selectedArticles: payload.values
+      }
+    case CHANGE_FILTER_DATE_FROM:
+      return {
+        ...filterState,
+        dateFrom: payload.date
+      }
+    case CHANGE_FILTER_DATE_TO:
+      return {
+        ...filterState,
+        dateTo: payload.date
+      }
     default:
       return filterState
   }

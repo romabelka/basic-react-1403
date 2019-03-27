@@ -19,7 +19,7 @@ function SelectFilter({ articles, filterArticlesIds, changeSelectedArticles }) {
 export default connect(
   (state) => ({
     articles: state.articles,
-    filterArticlesIds: state.filterArticlesIds
+    filterArticlesIds: state.filter.selectedArticles
   }),
   { changeSelectedArticles }
 )(SelectFilter)

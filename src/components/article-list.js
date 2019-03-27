@@ -58,7 +58,7 @@ export class ArticleList extends Component {
 
 export default connect((state) => ({
   articles: state.articles,
-  filterArticlesIds: state.filterArticlesIds,
-  filterDateFrom: state.filterDateFrom,
-  filterDateTo: state.filterDateTo
+  filterArticlesIds: state.filter.selectedArticles,
+  filterDateFrom: state.filter.dateFrom,
+  filterDateTo: state.filter.dateTo
 }))(accordion(ArticleList))

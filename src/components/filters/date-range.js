@@ -25,8 +25,8 @@ function DateRange({ from, to, changeFilterDateFrom, changeFilterDateTo }) {
 
 export default connect(
   (state) => ({
-    from: state.filterDateFrom,
-    to: state.filterDateTo
+    from: state.filter.dateFrom,
+    to: state.filter.dateTo
   }),
   {
     changeFilterDateFrom,
