@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import articles from '../../fixtures'
 import { selectArticles } from '../../ac'
 
-function SelectFilter({ selected, onChange, selectArticles }) {
+function SelectFilter({ selected, filterArticle, selectArticles }) {
   const options = articles.map((article) => ({
     label: article.title,
     value: article.id
@@ -15,18 +15,13 @@ function SelectFilter({ selected, onChange, selectArticles }) {
       options={options}
       value={selected}
       onChange={(opt) => {
-        onChange(opt)
         selectArticles(opt)
       }}
       isMulti
     />
   )
 }
-const mapStateToProps = (storeState) => ({
-  selected: storeState.selected
-})
-
 export default connect(
-  mapStateToProps,
+  null,
   { selectArticles }
 )(SelectFilter)

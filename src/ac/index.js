@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, INCREMENT, FILTER_ARTICLE, SELECTED_ARTICLES } from '../constants'
+import { DELETE_ARTICLE, INCREMENT, SELECTED_ARTICLES } from '../constants'
 
 export const increment = () => ({
   type: INCREMENT
@@ -7,11 +7,6 @@ export const increment = () => ({
 export const deleteArticle = (id) => ({
   type: DELETE_ARTICLE,
   payload: { id }
-})
-
-export const filterArticle = (obj) => ({
-  type: FILTER_ARTICLE,
-  payload: obj
 })
 
 export const selectArticles = (obj) => ({
