@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
+import { connect } from 'react-redux'
+import articles from '../../fixtures'
+import { selectArticles } from '../../ac'
 
-function SelectFilter({ articles, onChange }) {
-  const [selected, setSelection] = useState(null)
-
+function SelectFilter({ selected, onChange, selectArticles }) {
   const options = articles.map((article) => ({
     label: article.title,
     value: article.id
@@ -14,13 +15,18 @@ function SelectFilter({ articles, onChange }) {
       options={options}
       value={selected}
       onChange={(opt) => {
-        console.log(opt)
-        setSelection()
         onChange(opt)
+        selectArticles(opt)
       }}
       isMulti
     />
   )
 }
+const mapStateToProps = (storeState) => ({
+  selected: storeState.selected
+})
 
-export default SelectFilter
+export default connect(
+  mapStateToProps,
+  { selectArticles }
+)(SelectFilter)

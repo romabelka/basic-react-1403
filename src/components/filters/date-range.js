@@ -6,7 +6,10 @@ import 'react-day-picker/lib/style.css'
 function DateRange() {
   const [state, setState] = useState({ from: null, to: null })
 
-  const handleDayClick = (day) => setState(DateUtils.addDayToRange(day, state))
+  const handleDayClick = (day) => {
+    setState(DateUtils.addDayToRange(day, state))
+    console.log(state)
+  }
 
   const { from, to } = state
   const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`

@@ -7,21 +7,18 @@ import { connect } from 'react-redux'
 
 class Filters extends Component {
   static propTypes = {
-    articles: PropTypes.array.isRequired,
     filterArticle: PropTypes.func.isRequired
   }
 
   render() {
     return (
       <div>
-        <SelectFilter articles={this.props.articles} onChange={this.props.filterArticle} />
+        <SelectFilter onChange={this.props.filterArticle} />
         <DateRange />
       </div>
     )
   }
 }
-// const mapStateToProps = (store) => ({ articles: store.articles })
-
 export default connect(
   null,
   { filterArticle }
