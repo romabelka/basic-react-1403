@@ -8,12 +8,17 @@ function DateRange({ dateRange, chooseDateRange, changeArticlesRange }) {
   const [state, setState] = useState({ from: null, to: null })
 
   const handleDayClick = (day) => {
-    setState(DateUtils.addDayToRange(day, state))
+    let newState = DateUtils.addDayToRange(day, state)
+    setState(newState)
+    return newState
+  }
+
+  const onDayClicked = (day) => {
+    let { from, to } = handleDayClick(day)
+    if (from && to) chooseDateRange({ from, to })
   }
 
   const { from, to } = state
-
-  if (from && to) chooseDateRange(state)
 
   const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
 
@@ -21,7 +26,7 @@ function DateRange({ dateRange, chooseDateRange, changeArticlesRange }) {
     <div className="date-range">
       <DayPicker
         selectedDays={(day) => DateUtils.isDayInRange(day, { from, to })}
-        onDayClick={handleDayClick}
+        onDayClick={onDayClicked}
       />
       {selectedRange}
     </div>
