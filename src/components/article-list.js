@@ -29,8 +29,18 @@ export class ArticleList extends Component {
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
+    const { articles, toggleOpenItem, openItemId , dateRange, filteredArticles} = this.props;
+    const filteredArticlesList = filteredArticles
+      ? filteredArticles.length != 0
+        ? filteredArticles
+        : articles
+      : articles;
+
+    const filteredByDayArticleList = dateRange.to === null
+      ? filteredArticlesList
+      : filteredArticlesList.filter((article) => ((Date.parse(article.date) - dateRange.from >= 0) && (dateRange.to - Date.parse(article.date)  >= 0)))
+
+    const articleItems = filteredByDayArticleList.map((article) => (
       <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
@@ -44,9 +54,8 @@ export class ArticleList extends Component {
   }
 }
 
-
-
 export default connect((state) => ({
-  articles: state.filteredArticles ? state.filteredArticles.length != 0 ? state.filteredArticles : state.articles : state.articles,
-  notUsable: state.currentRange
+  articles: state.articles,
+  filteredArticles: state.filteredArticles,
+  dateRange: state.currentRange
 }))(accordion(ArticleList))
