@@ -6,11 +6,8 @@ import { changeDateRange } from '../../ac'
 import 'react-day-picker/lib/style.css'
 
 function DateRange({ fromDate, toDate, handleChangeDateRange }) {
-  console.log('init component ', fromDate, toDate)
   const handleDayClick = (day) => {
-    console.log('befor ', fromDate, toDate)
     const { from, to } = DateUtils.addDayToRange(day, { from: fromDate, to: toDate })
-    console.log('after ', from, to)
     handleChangeDateRange(from, to)
   }
 
@@ -20,7 +17,7 @@ function DateRange({ fromDate, toDate, handleChangeDateRange }) {
   return (
     <div className="date-range">
       <DayPicker
-        selectedDays={(day) => DateUtils.isDayInRange(day, { fromDate, toDate })}
+        selectedDays={(day) => DateUtils.isDayInRange(day, { from: fromDate, to: toDate })}
         onDayClick={handleDayClick}
       />
       {selectedRange}
@@ -29,8 +26,8 @@ function DateRange({ fromDate, toDate, handleChangeDateRange }) {
 }
 
 const mapStoreStateToProps = (storeState) => ({
-  fromDate: storeState.dateRange.fromDate,
-  toDate: storeState.dateRange.toDate
+  fromDate: storeState.filter.dateRange.fromDate,
+  toDate: storeState.filter.dateRange.toDate
 })
 
 const mapDispatchToProps = {
