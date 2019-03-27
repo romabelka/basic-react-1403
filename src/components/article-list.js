@@ -34,6 +34,7 @@ export class ArticleList extends Component {
       selected.length > 0
         ? articles.filter((article) => selected.some((e) => e.value === article.id))
         : articles
+
     const articleItems = selectedArticles.map((article) => (
       <li key={article.id} className="test--article-list__item">
         <Article
