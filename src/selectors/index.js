@@ -21,3 +21,16 @@ export const filtratedArticlesSelector = createSelector(
     })
   }
 )
+
+const idSelector = (_, { id }) => id
+const commentsSelector = (state) => state.comments
+
+export const createCommentSelector = () =>
+  createSelector(
+    commentsSelector,
+    idSelector,
+    (comments, id) => {
+      console.log('---', 'comment selector', id)
+      return comments.find((comment) => comment.id === id)
+    }
+  )
