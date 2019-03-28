@@ -1,5 +1,13 @@
 import {} from '../constants'
-import { normalizedComments as defaultComments } from '../fixtures'
+import { normalizedComments } from '../fixtures'
+
+const defaultComments = normalizedComments.reduce(
+  (acc, comment) => ({
+    ...acc,
+    [comment.id]: comment
+  }),
+  {}
+)
 
 export default (comments = defaultComments, action) => {
   const { type } = action
