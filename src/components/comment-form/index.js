@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addComment } from '../../ac'
 import './style.css'
 
 class CommentForm extends Component {
@@ -35,6 +37,8 @@ class CommentForm extends Component {
       user: '',
       text: ''
     })
+
+    this.props.addComment({ comment: this.state, articleId: this.props.articleId })
   }
 
   isValidForm = () => ['user', 'text'].every(this.isValidField)
@@ -63,4 +67,7 @@ const limits = {
   }
 }
 
-export default CommentForm
+export default connect(
+  null,
+  { addComment }
+)(CommentForm)
