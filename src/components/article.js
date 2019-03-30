@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { deleteArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
-import { createGetArticleByIdSelector } from '../selectors'
+import { getArticleByIdSelector } from '../selectors'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle }) {
   console.log('---', 'rendering article')
@@ -42,15 +42,8 @@ Article.propTypes = {
     text: PropTypes.string
   })
 }
-const createMapStateToProps = () => {
-  const getArticleById = createGetArticleByIdSelector()
-
-  return (state, props) => ({
-    article: getArticleById(state, props)
-  })
-}
 
 export default connect(
-  createMapStateToProps,
+  (state, props) => ({ article: getArticleByIdSelector(state, props) }),
   { deleteArticle }
 )(Article)
