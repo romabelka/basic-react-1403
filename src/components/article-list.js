@@ -29,11 +29,9 @@ export class ArticleList extends Component {
 
   render() {
     console.log('---', 'rendering ArticleList')
-    console.log(this.props)
     if (this.state.error) return <h2>OOooops</h2>
 
     const { articles, toggleOpenItem, openItemId } = this.props
-    console.log(articles)
     //В компоненте Article нет свойства id, но если убрать id={id}, всё ломается, не совсем понимаю почему
     const articleItems = articles.map((id) => (
       <li key={id} className="test--article-list__item">

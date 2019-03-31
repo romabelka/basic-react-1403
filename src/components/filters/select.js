@@ -5,7 +5,6 @@ import { changeSelection } from '../../ac'
 import { articleSelector, articleListSelector, selectedSelector } from '../../selectors'
 
 function SelectFilter({ articles, articleList, selected, changeSelection }) {
-  console.log(articles)
   const options = articleList
     .map((id) => articles[id])
     .map((article) => ({

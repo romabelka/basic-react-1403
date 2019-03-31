@@ -13,13 +13,8 @@ export const filtratedArticlesSelector = createSelector(
   selectedSelector,
   (articles, article, { from, to }, selected) => {
     console.log('---', 'articles selector')
-    console.log(articles)
     return articles.filter((article) => {
       const published = Date.parse(article.date)
-      console.log(selected)
-      console.log(articles)
-      console.log(article)
-      console.log(articles.map((id) => article[id]))
       return (
         (!selected.length || selected.find((selected) => selected.value === article)) &&
         (!from || !to || (published > from && published < to))

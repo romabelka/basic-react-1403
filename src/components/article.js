@@ -7,9 +7,7 @@ import { createArticleSelector } from '../selectors'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle }) {
   const text = isOpen ? 'close' : 'open'
-  //console.log(id)
   //Совсем запутался, почему это работает
-  console.log(article)
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>

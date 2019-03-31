@@ -14,11 +14,9 @@ export default (filters = defaultFilters, action) => {
   switch (type) {
     case CHANGE_DATE_RANGE:
       //            return Object.assign({}, filters, { dateRange: payload.dateRange })
-      console.log(filters)
       return { ...filters, dateRange: payload.dateRange }
 
     case CHANGE_SELECTION:
-      console.log(filters)
       return { ...filters, selected: payload.selected }
 
     case DELETE_ARTICLE:
