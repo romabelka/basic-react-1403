@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { deleteArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import { getArticleByIdSelector } from '../selectors'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle }) {
+  console.log('---', 'rendering article')
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
@@ -28,7 +30,7 @@ function getBody({ isOpen, article }) {
   return (
     <section className="test--article__body">
       {article.text}
-      <CommentList comments={article.comments} />
+      <CommentList comments={article.comments} articleId={article.id} />
     </section>
   )
 }
@@ -42,6 +44,6 @@ Article.propTypes = {
 }
 
 export default connect(
-  null,
+  (state, props) => ({ article: getArticleByIdSelector(state, props) }),
   { deleteArticle }
 )(Article)
