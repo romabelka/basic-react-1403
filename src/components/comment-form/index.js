@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import './style.css'
+import { addComment } from '../../ac'
+import { connect } from 'react-redux'
+import { articleSelector } from '../../selectors'
 
 class CommentForm extends Component {
   static propTypes = {}
 
   state = {
     user: '',
-    text: ''
+    text: '',
+    commentAdd: addComment
   }
 
   render() {
@@ -30,6 +34,7 @@ class CommentForm extends Component {
   }
 
   handleSubmit = (ev) => {
+    this.state.commentAdd(this.state.user, this.state.text)
     ev.preventDefault()
     this.setState({
       user: '',
@@ -63,4 +68,10 @@ const limits = {
   }
 }
 
-export default CommentForm
+export default connect(
+  (state) => ({
+    articles: articleSelector(state),
+    comments: state.comments
+  }),
+  { addComment }
+)(CommentForm)

@@ -9,6 +9,7 @@ export default (store) => (next) => (action) => {
     return ID
   }
   const ID = randomID()
-  next(action)
+  next((action.commentID = ID))
   console.log('---', 'random ID', ID)
+  console.log('---', 'action parameters', action.user, '  ', action.text)
 }
