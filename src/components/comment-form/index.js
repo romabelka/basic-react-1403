@@ -33,9 +33,9 @@ class CommentForm extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault()
-    const { addNewComment } = this.props
+    const { addNewComment, article } = this.props
     const { user, text } = this.state
-    addNewComment({ user, text })
+    addNewComment({ user, text, article })
   }
 
   isValidForm = () => ['user', 'text'].every(this.isValidField)
