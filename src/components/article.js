@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { deleteArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import { createArticleSelector } from '../selectors'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle }) {
   const text = isOpen ? 'close' : 'open'
@@ -34,14 +35,18 @@ function getBody({ isOpen, article }) {
 }
 
 Article.propTypes = {
-  article: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string
+  id: PropTypes.string.isRequired
+}
+
+const createMapStateToProps = () => {
+  const articleSelector = createArticleSelector()
+
+  return (state, ownProps) => ({
+    article: articleSelector(state, ownProps)
   })
 }
 
 export default connect(
-  null,
+  createMapStateToProps,
   { deleteArticle }
 )(Article)
