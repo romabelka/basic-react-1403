@@ -10,7 +10,6 @@ function App() {
     const { value } = ev.target
     setUsername(value.length < 10 ? value : '')
   }
-
   return (
     <>
       <h1>Article App</h1>

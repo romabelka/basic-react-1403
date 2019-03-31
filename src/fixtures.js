@@ -155,6 +155,16 @@ export const normalizedArticles = [
   }
 ]
 
+export const normalizedArticleList = [
+  '56c782f18990ecf954f6e027',
+  '56c782f17b4e0ba78c7ad717',
+  '56c782f1978fdf9a0100df52',
+  '56c782f1e17f4f9311dfaa2c',
+  '56c782f197fe2bad471b3740',
+  '56c782f1a2c2c3268ddb3206',
+  '56c782fghgfc2c3268ddb3206'
+]
+
 export default [
   {
     id: '56c782f18990ecf954f6e027',
