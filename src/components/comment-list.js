@@ -4,7 +4,7 @@ import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
 
-function CommentList({ comments }) {
+function CommentList({ comments, articleId }) {
   const { isOpen, toggleOpen } = useToggler()
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
@@ -12,12 +12,12 @@ function CommentList({ comments }) {
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ comments, isOpen })}
+      {getBody({ comments, isOpen, articleId })}
     </div>
   )
 }
 
-function getBody({ comments, isOpen }) {
+function getBody({ comments, isOpen, articleId }) {
   if (!isOpen) return null
 
   const body =
@@ -36,7 +36,7 @@ function getBody({ comments, isOpen }) {
   return (
     <div className="test--comment-list__body">
       {body}
-      <CommentForm />
+      <CommentForm articleId={articleId} />
     </div>
   )
 }

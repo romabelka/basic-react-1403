@@ -5,10 +5,13 @@ import { changeSelection } from '../../ac'
 import { articleListSelector, selectedSelector } from '../../selectors'
 
 function SelectFilter({ articles, selected, changeSelection }) {
-  const options = articles.map((article) => ({
-    label: article.title,
-    value: article.id
-  }))
+  const options = Object.keys(articles).map((key) => {
+    let article = articles[key]
+    return {
+      label: article.title,
+      value: key
+    }
+  })
 
   return <Select options={options} value={selected} onChange={changeSelection} isMulti />
 }
