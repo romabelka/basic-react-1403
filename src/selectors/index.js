@@ -1,12 +1,13 @@
 import { createSelector } from 'reselect'
 
-export const articleListSelector = (state) => state.articles
+export const articleSelector = (state) => state.articles
+export const articleListSelector = (state) => state.articleList
 export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
 
 export const filtratedArticlesSelector = createSelector(
-  articleListSelector,
+  articleSelector,
   dateRangeSelector,
   selectedSelector,
   (articles, { from, to }, selected) => {
