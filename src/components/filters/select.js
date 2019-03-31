@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
 import { changeSelection } from '../../ac'
-import { articleListSelector, selectedSelector } from '../../selectors'
+import { selectOptionSelector, selectedSelector } from '../../selectors'
 
 function SelectFilter({ articles, selected, changeSelection }) {
   const options = articles.map((article) => ({
@@ -16,7 +16,7 @@ function SelectFilter({ articles, selected, changeSelection }) {
 export default connect(
   (state) => ({
     selected: selectedSelector(state),
-    articles: articleListSelector(state)
+    articles: selectOptionSelector(state)
   }),
   { changeSelection }
 )(SelectFilter)
