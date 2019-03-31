@@ -1,6 +1,9 @@
 import md5 from 'js-md5'
+import { ADD_NEW_COMMENT } from '../constants'
+
 export default (store) => (next) => (action) => {
-  const id = md5(Date.now().toString())
-  console.log('---', 'id:', id)
+  if (action.type === ADD_NEW_COMMENT) {
+    action.payload.id = md5(Date.now().toString())
+  }
   next(action)
 }
