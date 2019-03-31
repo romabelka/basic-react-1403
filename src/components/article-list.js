@@ -29,16 +29,15 @@ export class ArticleList extends Component {
 
   render() {
     console.log('---', 'rendering ArticleList')
+    console.log(this.props)
     if (this.state.error) return <h2>OOooops</h2>
 
     const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
-      <li key={article.id} className="test--article-list__item">
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          onBtnClick={toggleOpenItem(article.id)}
-        />
+    console.log(articles)
+    //В компоненте Article нет свойства id, но если убрать id={id}, всё ломается, не совсем понимаю почему
+    const articleItems = articles.map((id) => (
+      <li key={id} className="test--article-list__item">
+        <Article id={id} isOpen={id === openItemId} onBtnClick={toggleOpenItem(id)} />
       </li>
     ))
 

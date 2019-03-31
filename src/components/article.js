@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import { deleteArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import { createArticleSelector } from '../selectors'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle }) {
   const text = isOpen ? 'close' : 'open'
+  //console.log(id)
+  //Совсем запутался, почему это работает
+  console.log(article)
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
@@ -41,7 +45,15 @@ Article.propTypes = {
   })
 }
 
+const createMapStateToProps = () => {
+  const articleSelector = createArticleSelector()
+
+  return (state, ownProps) => ({
+    article: articleSelector(state, ownProps)
+  })
+}
+
 export default connect(
   null,
   { deleteArticle }
-)(Article)
+)(connect(createMapStateToProps)(Article))
