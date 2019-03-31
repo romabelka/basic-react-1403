@@ -12,7 +12,7 @@ class SelectFilter extends Component {
 
   handleChange = (values) => {
     const commonValues = values.reduce((acc, curr) => {
-      acc.push(curr.label)
+      acc.push(curr.value)
       return acc
     }, [])
 

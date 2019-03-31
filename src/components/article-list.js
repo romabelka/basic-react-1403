@@ -42,14 +42,17 @@ export class ArticleList extends Component {
 
   render() {
     if (this.state.error) return <h2>OOooops</h2>
-
     const { articles, toggleOpenItem, openItemId, dates, selectValues } = this.props
 
+    let sortArray = articles
+
     if (selectValues !== null) {
-      console.log(selectValues, 'selectValues')
+      sortArray = articles.filter(function(article) {
+        return selectValues.values.length ? selectValues.values.includes(article.id) : true
+      })
     }
 
-    const articleItems = articles.map((article) => {
+    const articleItems = sortArray.map((article) => {
       if (dates === null) {
         return this.renderTemplateArticle(article, toggleOpenItem, openItemId)
       }
