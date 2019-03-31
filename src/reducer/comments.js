@@ -1,4 +1,4 @@
-import {} from '../constants'
+import { ADD_COMMENT } from '../constants'
 import { normalizedComments } from '../fixtures'
 
 const defaultComments = normalizedComments.reduce(
@@ -10,9 +10,13 @@ const defaultComments = normalizedComments.reduce(
 )
 
 export default (comments = defaultComments, action) => {
-  const { type } = action
-
-  switch (type) {
+  switch (action.type) {
+    case ADD_COMMENT: {
+      const {
+        payload: { comment, generatedId }
+      } = action
+      return { ...comments, [generatedId]: { ...comment, id: generatedId } }
+    }
     default:
       return comments
   }
