@@ -6,9 +6,23 @@ export default (articlesState = defaultArticles, action) => {
 
   switch (type) {
     case DELETE_ARTICLE:
-      return articlesState.filter((article) => article.id !== payload.id)
+      return articlesState
+        .filter((article) => article.id !== payload.id)
+        .reduce(
+          (acc, article) => ({
+            ...acc,
+            [article.id]: article
+          }),
+          {}
+        )
 
     default:
-      return articlesState
+      return articlesState.reduce(
+        (acc, article) => ({
+          ...acc,
+          [article.id]: article
+        }),
+        {}
+      )
   }
 }
