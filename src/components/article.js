@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { deleteArticle } from '../ac'
+import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
 
-function Article({ isOpen, article, onBtnClick, deleteArticle }) {
+function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
+  useEffect(() => {
+    isOpen && loadArticle(article.id)
+  }, [isOpen])
+
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
@@ -28,7 +32,7 @@ function getBody({ isOpen, article }) {
   return (
     <section className="test--article__body">
       {article.text}
-      <CommentList comments={article.comments} />
+      <CommentList article={article} />
     </section>
   )
 }
@@ -43,5 +47,5 @@ Article.propTypes = {
 
 export default connect(
   null,
-  { deleteArticle }
+  { deleteArticle, loadArticle }
 )(Article)
