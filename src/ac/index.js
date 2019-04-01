@@ -3,7 +3,8 @@ import {
   CHANGE_DATE_RANGE,
   CHANGE_SELECTION,
   DELETE_ARTICLE,
-  INCREMENT
+  INCREMENT,
+  LOAD_ALL_ARTICLES
 } from '../constants'
 
 export const increment = () => ({
@@ -29,4 +30,9 @@ export const addComment = (comment, articleId) => ({
   type: ADD_COMMENT,
   payload: { comment, articleId },
   generateId: true
+})
+
+export const loadAllArticles = () => ({
+  type: LOAD_ALL_ARTICLES,
+  callAPI: '/api/article'
 })

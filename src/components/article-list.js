@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Article from './article'
 import accordion from '../decorators/accordion'
 import { filtratedArticlesSelector } from '../selectors'
+import { loadAllArticles } from '../ac'
 
 export class ArticleList extends Component {
   static propTypes = {
@@ -46,9 +47,9 @@ export class ArticleList extends Component {
   }
 }
 
-export default connect((state) => {
-  console.log('---', 'connect')
-  return {
+export default connect(
+  (state) => ({
     articles: filtratedArticlesSelector(state)
-  }
-})(accordion(ArticleList))
+  }),
+  { fetchAll: loadAllArticles }
+)(accordion(ArticleList))
