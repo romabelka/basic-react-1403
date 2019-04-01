@@ -7,7 +7,7 @@ import { filtratedArticlesSelector } from '../selectors'
 
 export class ArticleList extends Component {
   static propTypes = {
-    articles: PropTypes.array.isRequired,
+    articles: PropTypes.object.isRequired,
     fetchAll: PropTypes.func,
     //from decorator
     openItemId: PropTypes.string,
