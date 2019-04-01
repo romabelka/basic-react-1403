@@ -21,11 +21,7 @@ export default (articlesState = defaultArticles, action) => {
       const foundArticle = newState[payload.articleId]
 
       if (foundArticle) {
-        if (foundArticle.comments) {
-          foundArticle.comments.push(payload.id)
-        } else {
-          foundArticle.comments = [payload.id]
-        }
+        foundArticle.comments = [...foundArticle.comments, payload.id]
       }
       return newState
 
