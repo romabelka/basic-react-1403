@@ -4,7 +4,9 @@ import {
   CHANGE_SELECTION,
   DELETE_ARTICLE,
   INCREMENT,
-  LOAD_ALL_ARTICLES
+  LOAD_ALL_ARTICLES,
+  LOAD_ARTICLE,
+  SUCCESS
 } from '../constants'
 
 export const increment = () => ({
@@ -36,3 +38,14 @@ export const loadAllArticles = () => ({
   type: LOAD_ALL_ARTICLES,
   callAPI: '/api/article'
 })
+
+export const loadArticle = (id) => async (dispatch) => {
+  const rawRes = await fetch(`/api/article/${id}`)
+  const response = await rawRes.json()
+
+  dispatch({
+    type: LOAD_ARTICLE + SUCCESS,
+    payload: { id },
+    response
+  })
+}
