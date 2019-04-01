@@ -5,8 +5,15 @@ export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
 
-export const filtratedArticlesSelector = createSelector(
+export const articlesArrSelector = createSelector(
   articleListSelector,
+  (articleList) => {
+    return Object.values(articleList)
+  }
+)
+
+export const filtratedArticlesSelector = createSelector(
+  articlesArrSelector,
   dateRangeSelector,
   selectedSelector,
   (articles, { from, to }, selected) => {
