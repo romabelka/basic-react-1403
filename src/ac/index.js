@@ -39,13 +39,8 @@ export const loadAllArticles = () => ({
   callAPI: '/api/article'
 })
 
-export const loadArticle = (id) => async (dispatch) => {
-  const rawRes = await fetch(`/api/article/${id}`)
-  const response = await rawRes.json()
-
-  dispatch({
-    type: LOAD_ARTICLE + SUCCESS,
-    payload: { id },
-    response
-  })
-}
+export const loadArticle = (id) => ({
+  type: LOAD_ARTICLE,
+  callAPI: `/api/article/${id}`,
+  payload: { id }
+})
