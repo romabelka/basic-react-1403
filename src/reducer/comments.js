@@ -17,10 +17,10 @@ export default (state = new ReducerRecord(), action) => {
 
   switch (type) {
     case ADD_COMMENT:
-      return state.set(randomId, {
-        ...payload.comment,
-        id: randomId
-      })
+      return state.setIn(
+        ['entities', randomId],
+        new CommentRecord({ ...payload.comment, id: randomId })
+      )
 
     case LOAD_ARTICLE_COMMENTS + SUCCESS:
       return state.set('entities', arrToMap(response))
