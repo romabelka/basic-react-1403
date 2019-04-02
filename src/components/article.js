@@ -3,11 +3,20 @@ import PropTypes from 'prop-types'
 import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import Loader from './common/loader'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
-    isOpen && loadArticle(article.id)
+    isOpen && !article.loaded && loadArticle(article.id)
   }, [isOpen])
+
+  if (article.loading)
+    return (
+      <div ref={setContainerRef}>
+        <h3>{article.title}</h3>
+        <Loader />
+      </div>
+    )
 
   const text = isOpen ? 'close' : 'open'
   return (
