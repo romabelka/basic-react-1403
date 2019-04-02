@@ -7,7 +7,8 @@ import {
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
   SUCCESS,
-  START
+  START,
+  LOAD_COMMENTS
 } from '../constants'
 
 export const increment = () => ({
@@ -51,6 +52,22 @@ export const loadArticle = (id) => async (dispatch) => {
 
   dispatch({
     type: LOAD_ARTICLE + SUCCESS,
+    payload: { id },
+    response
+  })
+}
+
+export const loadComments = (id) => async (dispatch) => {
+  dispatch({
+    type: LOAD_COMMENTS + START,
+    payload: { id }
+  })
+
+  const rawRes = await fetch(`/api/comment?article=${id}`)
+  const response = await rawRes.json()
+
+  dispatch({
+    type: LOAD_COMMENTS + SUCCESS,
     payload: { id },
     response
   })
