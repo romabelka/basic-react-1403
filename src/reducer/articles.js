@@ -6,7 +6,8 @@ import {
   SUCCESS,
   START,
   FAIL,
-  LOAD_ARTICLE
+  LOAD_ARTICLE,
+  LOAD_ARTICLE_COMMENTS
 } from '../constants'
 import { arrToMap } from './utils'
 
@@ -15,7 +16,12 @@ const ArticleRecord = Record({
   text: null,
   id: null,
   date: null,
-  comments: []
+  comments: [],
+  loading: false,
+  loaded: false,
+  loadingComments: false,
+  loadedComments: false,
+  errorComments: null
 })
 
 const ReducerRecord = Record({
@@ -37,6 +43,17 @@ export default (articlesState = new ReducerRecord(), action) => {
         comments.concat(randomId)
       )
 
+    case LOAD_ARTICLE_COMMENTS + START:
+      return articlesState.setIn(['entities', payload.id, 'loadingComments'], true)
+
+    case LOAD_ARTICLE_COMMENTS + SUCCESS:
+      return articlesState
+        .setIn(['entities', payload.id, 'loadedComments'], true)
+        .setIn(['entities', payload.id, 'loadingComments'], false)
+
+    case LOAD_ARTICLE_COMMENTS + FAIL:
+      return articlesState.setIn(['entities', payload.id, 'errorComments'], error)
+
     case LOAD_ALL_ARTICLES + START:
       return articlesState.set('loading', true)
 
@@ -49,8 +66,13 @@ export default (articlesState = new ReducerRecord(), action) => {
     case LOAD_ALL_ARTICLES + FAIL:
       return articlesState.set('error', error)
 
+    case LOAD_ARTICLE + START:
+      return articlesState.setIn(['entities', payload.id, 'loading'], true)
+
     case LOAD_ARTICLE + SUCCESS:
-      return articlesState.setIn(['entities', payload.id], new ArticleRecord(response))
+      return articlesState
+        .setIn(['entities', payload.id], new ArticleRecord(response))
+        .setIn(['entities', payload.id, 'loaded'], true)
 
     default:
       return articlesState

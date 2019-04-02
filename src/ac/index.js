@@ -5,7 +5,9 @@ import {
   DELETE_ARTICLE,
   INCREMENT,
   LOAD_ALL_ARTICLES,
+  LOAD_ARTICLE_COMMENTS,
   LOAD_ARTICLE,
+  START,
   SUCCESS
 } from '../constants'
 
@@ -28,6 +30,12 @@ export const changeSelection = (selected) => ({
   payload: { selected }
 })
 
+export const loadArticleComments = (articleId) => ({
+  type: LOAD_ARTICLE_COMMENTS,
+  payload: { id: articleId },
+  callAPI: `/api/comment?article=${articleId}`
+})
+
 export const addComment = (comment, articleId) => ({
   type: ADD_COMMENT,
   payload: { comment, articleId },
@@ -40,6 +48,11 @@ export const loadAllArticles = () => ({
 })
 
 export const loadArticle = (id) => async (dispatch) => {
+  dispatch({
+    type: LOAD_ARTICLE + START,
+    payload: { id }
+  })
+
   const rawRes = await fetch(`/api/article/${id}`)
   const response = await rawRes.json()
 
