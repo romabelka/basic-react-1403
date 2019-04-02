@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
-    isOpen && loadArticle(article.id)
+    article.text || (isOpen && loadArticle(article.id))
   }, [isOpen])
 
   const text = isOpen ? 'close' : 'open'
@@ -31,7 +31,7 @@ function getBody({ isOpen, article }) {
 
   return (
     <section className="test--article__body">
-      {article.text}
+      {article.text || 'Loading...'}
       <CommentList article={article} />
     </section>
   )
