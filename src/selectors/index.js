@@ -7,6 +7,8 @@ export const selectedSelector = (state) => filtersSelector(state).selected
 export const articlesLoadingSelector = (state) => state.articles.get('loading')
 export const articleLoadedSelector = (article) => article.get('loaded')
 export const articleLoadingSelector = (article) => article.get('loading')
+export const commentsLoadedSelector = (article) => article.get('loadedComments')
+export const commentsLoadingSelector = (article) => article.get('loadingComments')
 
 export const filtratedArticlesSelector = createSelector(
   articleListSelector,
@@ -26,7 +28,7 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 const idSelector = (_, { id }) => id
-const commentsSelector = (state) => state.comments
+const commentsSelector = (state) => state.comments.entities
 
 export const createCommentSelector = () =>
   createSelector(
