@@ -6,7 +6,9 @@ import {
   INCREMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
-  SUCCESS
+  SUCCESS,
+  START,
+  FAIL
 } from '../constants'
 
 export const increment = () => ({
@@ -40,12 +42,22 @@ export const loadAllArticles = () => ({
 })
 
 export const loadArticle = (id) => async (dispatch) => {
-  const rawRes = await fetch(`/api/article/${id}`)
-  const response = await rawRes.json()
-
   dispatch({
-    type: LOAD_ARTICLE + SUCCESS,
-    payload: { id },
-    response
+    type: LOAD_ARTICLE + START
   })
+  fetch(`/api/article/${id}`)
+    .then((res) => res.json())
+    .then((response) => {
+      dispatch({
+        type: LOAD_ARTICLE + SUCCESS,
+        payload: { id },
+        response
+      })
+    })
+    .catch((error) => {
+      dispatch({
+        type: LOAD_ARTICLE + FAIL,
+        error: error
+      })
+    })
 }

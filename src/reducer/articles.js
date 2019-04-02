@@ -15,14 +15,17 @@ const ArticleRecord = Record({
   text: null,
   id: null,
   date: null,
-  comments: []
+  comments: [],
+  loaded: false
 })
 
 const ReducerRecord = Record({
   entities: arrToMap([], ArticleRecord),
   loading: false,
   loaded: false,
-  error: null
+  error: null,
+  articleLoading: false,
+  articleLoaded: false
 })
 
 export default (articlesState = new ReducerRecord(), action) => {
@@ -49,8 +52,17 @@ export default (articlesState = new ReducerRecord(), action) => {
     case LOAD_ALL_ARTICLES + FAIL:
       return articlesState.set('error', error)
 
+    case LOAD_ARTICLE + START:
+      return articlesState.set('articleLoading', true)
+
     case LOAD_ARTICLE + SUCCESS:
-      return articlesState.setIn(['entities', payload.id], new ArticleRecord(response))
+      return articlesState
+        .setIn(['entities', payload.id], new ArticleRecord(response).set('loaded', true))
+        .set('articleLoading', false)
+        .set('articleLoaded', true)
+
+    case LOAD_ARTICLE + FAIL:
+      return articlesState.set('error', error)
 
     default:
       return articlesState
