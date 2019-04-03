@@ -30,7 +30,6 @@ export default (state = new ReducerRecord(), action) => {
     //   return state.setIn(['entities', payload.articleId, 'loading'], true)
 
     case LOAD_COMMENTS + SUCCESS:
-      console.log(12)
       return state.mergeIn(['entities'], arrToMap(response, CommentRecord))
 
     default:

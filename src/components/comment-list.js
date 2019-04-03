@@ -8,11 +8,11 @@ import { loadComments } from '../ac'
 import Loader from './common/loader'
 import { commentsLoadedSelector, commentsLoadingSelector } from '../selectors'
 
-function CommentList({ article, loadComments, loaded, loading }) {
+function CommentList({ article, loadComments, commentsLoaded, commentsLoading }) {
   const { isOpen, toggleOpen } = useToggler()
 
   useEffect(() => {
-    if (!isOpen || loaded || loading) return
+    if (!isOpen || commentsLoaded || commentsLoading) return
 
     loadComments(article.id)
   }, [isOpen])
@@ -24,17 +24,17 @@ function CommentList({ article, loadComments, loaded, loading }) {
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen, loaded, loading })}
+      {getBody({ article, isOpen, commentsLoaded, commentsLoading })}
     </div>
   )
 }
 
-function getBody({ article: { comments, id }, isOpen, loaded, loading }) {
+function getBody({ article: { comments, id }, isOpen, commentsLoaded, commentsLoading }) {
   if (!isOpen) return null
 
-  if (loading) return <Loader />
+  if (commentsLoading) return <Loader />
 
-  if (loaded) return null
+  if (!commentsLoaded) return null
 
   const body =
     comments && comments.length ? (
@@ -63,8 +63,8 @@ CommentList.propTypes = {
 
 export default connect(
   (state, { article }) => ({
-    loaded: commentsLoadedSelector(article),
-    loading: commentsLoadingSelector(article)
+    commentsLoaded: commentsLoadedSelector(article),
+    commentsLoading: commentsLoadingSelector(article)
   }),
   { loadComments }
 )(CommentList)
