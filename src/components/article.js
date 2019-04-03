@@ -3,15 +3,19 @@ import PropTypes from 'prop-types'
 import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import Loader from './common/loader'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
-    isOpen && loadArticle(article.id)
-  }, [isOpen])
+    if (!isOpen || article.text || article.loading) return
+
+    loadArticle(article.id)
+  }, [isOpen, article.loading])
 
   const text = isOpen ? 'close' : 'open'
+
   return (
-    <div ref={setContainerRef}>
+    <div>
       <h3>{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
@@ -22,12 +26,10 @@ function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   )
 }
 
-function setContainerRef(element) {
-  //  console.log('---', element)
-}
-
 function getBody({ isOpen, article }) {
   if (!isOpen) return null
+
+  if (article.loading) return <Loader />
 
   return (
     <section className="test--article__body">
