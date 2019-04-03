@@ -6,18 +6,17 @@ import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
 import { loadComments } from '../ac'
 import Loader from './common/loader'
+import { commentsLoadedSelector, commentsLoadingSelector } from '../selectors'
 
-function CommentList({ article, loadComments }) {
-  useEffect(() => {
-    console.log('88', article.commentsLoading)
-    console.log('88', article.commentsLoaded)
-    if (article.commentsLoading || article.commentsLoaded) return
-
-    console.log(1212)
-    loadComments(article.id)
-  }, [article.commentsLoading, article.commentsLoaded])
-
+function CommentList({ article, loadComments, loaded, loading }) {
   const { isOpen, toggleOpen } = useToggler()
+
+  useEffect(() => {
+    if (!isOpen || loaded || loading) return
+
+    loadComments(article.id)
+  }, [isOpen])
+
   const text = isOpen ? 'hide comments' : 'show comments'
 
   return (
@@ -25,18 +24,17 @@ function CommentList({ article, loadComments }) {
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen })}
+      {getBody({ article, isOpen, loaded, loading })}
     </div>
   )
 }
 
-function getBody({ article: { comments, id, commentsLoading }, isOpen }) {
-  console.log(9)
+function getBody({ article: { comments, id }, isOpen, loaded, loading }) {
   if (!isOpen) return null
-  console.log(19)
-  if (commentsLoading) return <Loader />
 
-  console.log(4343)
+  if (loading) return <Loader />
+
+  if (loaded) return null
 
   const body =
     comments && comments.length ? (
@@ -59,20 +57,14 @@ function getBody({ article: { comments, id, commentsLoading }, isOpen }) {
   )
 }
 
-// CommentList.propTypes = {
-//   comments: PropTypes.array
-// }
-
-/*
-CommentList.defaultProps = {
-  comments: [],
-  defaultOpen: true
+CommentList.propTypes = {
+  comments: PropTypes.array
 }
-*/
-
-// export default CommentList
 
 export default connect(
-  null,
+  (state, { article }) => ({
+    loaded: commentsLoadedSelector(article),
+    loading: commentsLoadingSelector(article)
+  }),
   { loadComments }
 )(CommentList)
