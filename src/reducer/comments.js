@@ -1,9 +1,9 @@
-import { ADD_COMMENT } from '../constants'
-import { normalizedComments } from '../fixtures'
+import { ADD_COMMENT, SUCCESS, LOAD_COMMENTS } from '../constants'
+
 import { arrToMap } from './utils'
 
-export default (state = arrToMap(normalizedComments), action) => {
-  const { type, payload, randomId } = action
+export default (state = arrToMap([]), action) => {
+  const { type, payload, randomId, response } = action
 
   switch (type) {
     case ADD_COMMENT:
@@ -11,6 +11,9 @@ export default (state = arrToMap(normalizedComments), action) => {
         ...payload.comment,
         id: randomId
       })
+
+    case LOAD_COMMENTS + SUCCESS:
+      return response.reduce((acc, item) => acc.set(item.id, item), state)
 
     default:
       return state

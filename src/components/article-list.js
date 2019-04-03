@@ -36,20 +36,21 @@ export class ArticleList extends Component {
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId, loading } = this.props
+    const { articles, toggleOpenItem, openItemId, loading, loaded } = this.props
     if (loading) return <Loader />
-
-    const articleItems = articles.map((article) => (
-      <li key={article.id} className="test--article-list__item">
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          onBtnClick={toggleOpenItem(article.id)}
-        />
-      </li>
-    ))
-
-    return <ul>{articleItems}</ul>
+    if (loaded) {
+      const articleItems = articles.map((article) => (
+        <li key={article.id} className="test--article-list__item">
+          <Article
+            article={article}
+            isOpen={article.id === openItemId}
+            onBtnClick={toggleOpenItem(article.id)}
+          />
+        </li>
+      ))
+      return <ul>{articleItems}</ul>
+    }
+    return <></>
   }
 }
 

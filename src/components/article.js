@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
-import { createArticleLoadedSelector, createArticleLoadingSelector } from '../selectors'
 import Loader from './common/loader'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
@@ -31,12 +30,14 @@ function setContainerRef(element) {
 function getBody({ isOpen, article }) {
   if (!isOpen) return null
   if (article.loading) return <Loader />
-  return (
-    <section className="test--article__body">
-      {article.text}
-      <CommentList article={article} />
-    </section>
-  )
+  if (article.loaded)
+    return (
+      <section className="test--article__body">
+        {article.text}
+        <CommentList article={article} />
+      </section>
+    )
+  return <></>
 }
 
 Article.propTypes = {
@@ -47,16 +48,7 @@ Article.propTypes = {
   })
 }
 
-/* const mapStateToProps = (state) => {
-  const articleLoadedSelector = createArticleLoadedSelector()
-  const articleLoadingSelector = createArticleLoadingSelector()
-  return (state, props) => ({
-    loading: articleLoadingSelector(state, { id: props.article.id }),
-    loaded: articleLoadedSelector(state, { id: props.article.id })
-  })
-} */
-
 export default connect(
-  /* mapStateToProps, */ null,
+  null,
   { deleteArticle, loadArticle }
 )(Article)

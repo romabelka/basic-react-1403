@@ -6,7 +6,7 @@ import {
   INCREMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
-  SUCCESS
+  LOAD_COMMENTS
 } from '../constants'
 
 export const increment = () => ({
@@ -42,5 +42,11 @@ export const loadAllArticles = () => ({
 export const loadArticle = (id) => ({
   type: LOAD_ARTICLE,
   callAPI: `/api/article/${id}`,
+  payload: { id }
+})
+
+export const loadComments = (id) => ({
+  type: LOAD_COMMENTS,
+  callAPI: `/api/comment?article=${id}`,
   payload: { id }
 })

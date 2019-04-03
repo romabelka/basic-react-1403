@@ -33,27 +33,3 @@ export const createCommentSelector = () =>
     idSelector,
     (comments, id) => comments.get(id)
   )
-/* 
-export const createArticleSelector = () =>
-  createSelector(
-    articleListSelector,
-    idSelector,
-    (articles, id) => articles && articles.get(id)
-  )
-
-export const createArticleLoadingSelector = () =>
-  createSelector(
-    articleListSelector,
-    idSelector,
-    (articles, id) => {
-      console.log('articles -- ', articles, ' ---- id --', id, '---- ', articles.get(id))
-      return articles && articles.get(id).get('loading')
-    }
-  )
-
-export const createArticleLoadedSelector = () =>
-  createSelector(
-    articleListSelector,
-    idSelector,
-    (articles, id) => articles && articles.get(id).get('loaded')
-  ) */
