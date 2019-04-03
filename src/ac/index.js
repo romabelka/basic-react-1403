@@ -41,7 +41,7 @@ export const loadAllArticles = () => ({
   callAPI: '/api/article'
 })
 
-export const loadArticle = (id) => async (dispatch, getState) => {
+export const loadArticle = (id) => async (dispatch) => {
   dispatch({
     type: LOAD_ARTICLE + START,
     payload: { id }
@@ -57,7 +57,18 @@ export const loadArticle = (id) => async (dispatch, getState) => {
   })
 }
 
-export const loadComments = (id) => ({
-  type: LOAD_COMMENTS,
-  callAPI: `/api/comment?article=${id}`
-})
+export const loadComments = (id) => async (dispatch) => {
+  dispatch({
+    type: LOAD_COMMENTS + START,
+    id
+  })
+
+  const rawRes = await fetch(`/api/comment?article=${id}`)
+  const response = await rawRes.json()
+
+  dispatch({
+    type: LOAD_COMMENTS + SUCCESS,
+    id,
+    response
+  })
+}

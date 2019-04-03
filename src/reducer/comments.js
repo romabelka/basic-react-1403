@@ -1,10 +1,20 @@
-import { ADD_COMMENT, LOAD_COMMENTS, SUCCESS, START, FAIL } from '../constants'
-// import { normalizedComments } from '../fixtures'
+import { ADD_COMMENT, LOAD_COMMENTS, SUCCESS, START, LOAD_ALL_ARTICLES } from '../constants'
 import { arrToMap } from './utils'
 import { Record } from 'immutable'
 
+const CommentRecord = Record({
+  id: null,
+  user: null,
+  text: null
+})
+// const CommentsRecord = Record({
+//   entities:
+//   loading: false,
+//   loaded: false,
+// })
+
 export default (state = arrToMap([]), action) => {
-  const { type, payload, randomId, response } = action
+  const { type, payload, randomId, response, id } = action
 
   switch (type) {
     case ADD_COMMENT:
@@ -14,7 +24,13 @@ export default (state = arrToMap([]), action) => {
       })
 
     case LOAD_COMMENTS + SUCCESS:
-      return state.concat(arrToMap(response))
+      return state
+        .set(id, arrToMap(response, CommentRecord))
+        .setIn([id, 'loading'], 'false')
+        .setIn([id, 'loaded'], 'true')
+
+    case LOAD_COMMENTS + START:
+      return state.setIn([id, 'loading'], 'true')
 
     default:
       return state

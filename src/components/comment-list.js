@@ -5,11 +5,13 @@ import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
 import { connect } from 'react-redux'
 import { loadComments } from '../ac'
+import Loader from './common/loader'
+import { commentLoadingSelector } from '../selectors'
 
-function CommentList({ article, loadComments }) {
+function CommentList({ article, loadComments, loading }) {
   const { isOpen, toggleOpen } = useToggler()
   useEffect(() => {
-    loadComments(article.id)
+    isOpen && loadComments(article.id)
   }, [isOpen])
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
@@ -17,12 +19,13 @@ function CommentList({ article, loadComments }) {
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen })}
+      {getBody({ article, isOpen, loading })}
     </div>
   )
 }
 
-function getBody({ article, isOpen }) {
+function getBody({ article, isOpen, loading }) {
+  if (loading) return <Loader />
   const comments = article.comments
   const id = article.id
   if (!isOpen) return null
@@ -32,7 +35,7 @@ function getBody({ article, isOpen }) {
       <ul>
         {comments.map((commentId) => (
           <li key={commentId} className="test--comment-list__item">
-            <Comment id={commentId} />
+            <Comment id={commentId} article={id} />
           </li>
         ))}
       </ul>

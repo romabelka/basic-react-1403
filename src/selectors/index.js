@@ -12,6 +12,9 @@ export const articleLoadingSelector = (state, articleId) =>
 export const articleLoadedSelector = (state, articleId) =>
   state.articles.entities.get(articleId).loaded
 
+// // так и не смог придумать, как организовать стор
+// export const commentLoadingSelector = (state, article) => state.comments.get(article.id).get('loading');
+
 export const filtratedArticlesSelector = createSelector(
   articleListSelector,
   dateRangeSelector,
@@ -30,7 +33,7 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 const idSelector = (_, { id }) => id
-const commentsSelector = (state) => state.comments
+const commentsSelector = (state, { article }) => state.comments.get(article)
 
 export const createCommentSelector = () =>
   createSelector(
