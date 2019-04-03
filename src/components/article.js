@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import { createArticleLoadedSelector, createArticleLoadingSelector } from '../selectors'
 import Loader from './common/loader'
 
-function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle, loading, loaded }) {
+function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
-    isOpen && !loaded && loadArticle(article.id)
+    isOpen && !article.loaded && loadArticle(article.id)
   }, [isOpen])
 
   const text = isOpen ? 'close' : 'open'
@@ -19,7 +19,7 @@ function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle, load
         {text}
       </button>
       <button onClick={() => deleteArticle(article.id)}>delete me</button>
-      {getBody({ isOpen, article, loading })}
+      {getBody({ isOpen, article })}
     </div>
   )
 }
@@ -28,9 +28,9 @@ function setContainerRef(element) {
   //  console.log('---', element)
 }
 
-function getBody({ isOpen, article, loading }) {
+function getBody({ isOpen, article }) {
   if (!isOpen) return null
-  if (loading) return <Loader />
+  if (article.loading) return <Loader />
   return (
     <section className="test--article__body">
       {article.text}
@@ -47,16 +47,16 @@ Article.propTypes = {
   })
 }
 
-const mapStateToProps = (state) => {
+/* const mapStateToProps = (state) => {
   const articleLoadedSelector = createArticleLoadedSelector()
   const articleLoadingSelector = createArticleLoadingSelector()
   return (state, props) => ({
     loading: articleLoadingSelector(state, { id: props.article.id }),
     loaded: articleLoadedSelector(state, { id: props.article.id })
   })
-}
+} */
 
 export default connect(
-  mapStateToProps,
+  /* mapStateToProps, */ null,
   { deleteArticle, loadArticle }
 )(Article)

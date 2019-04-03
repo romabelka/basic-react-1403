@@ -33,7 +33,7 @@ export const createCommentSelector = () =>
     idSelector,
     (comments, id) => comments.get(id)
   )
-
+/* 
 export const createArticleSelector = () =>
   createSelector(
     articleListSelector,
@@ -56,4 +56,4 @@ export const createArticleLoadedSelector = () =>
     articleListSelector,
     idSelector,
     (articles, id) => articles && articles.get(id).get('loaded')
-  )
+  ) */
