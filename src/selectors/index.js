@@ -5,6 +5,8 @@ export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
 export const articlesLoadingSelector = (state) => state.articles.get('loading')
+export const articleLoadingSelector = (state, articleId) =>
+  state.articles.entities.get(articleId).get('loading')
 
 export const filtratedArticlesSelector = createSelector(
   articleListSelector,
