@@ -53,10 +53,10 @@ export default (articlesState = new ReducerRecord(), action) => {
       return articlesState.set('error', error)
 
     case LOAD_ARTICLE + SUCCESS:
-      return articlesState
-        .setIn(['entities', payload.id], new ArticleRecord(response))
-        .set('loading', false)
-        .set('loaded', true)
+      return articlesState.setIn(
+        ['entities', payload.id],
+        new ArticleRecord(response).set('loading', false).set('loaded', true)
+      )
 
     case LOAD_ARTICLE + START:
       return articlesState.setIn(['entities', payload.id, 'loading'], true)

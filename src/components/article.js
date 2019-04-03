@@ -4,14 +4,12 @@ import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
-import { articleLoadingSelector } from '../selectors'
+import { articleLoadingSelector, articleLoadedSelector } from '../selectors'
 
-function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle, loading }) {
+function Article({ isOpen, article, onBtnClick, deleteArticle, getArticle, loading }) {
   useEffect(() => {
-    isOpen && loadArticle(article.id)
+    isOpen && getArticle(article.id)
   }, [isOpen])
-  console.log('---')
-
   const text = isOpen ? 'close' : 'open'
   return (
     <div ref={setContainerRef}>
@@ -29,7 +27,7 @@ function setContainerRef(element) {
   //  console.log('---', element)
 }
 
-function getBody({ isOpen, article, loading }) {
+function getBody({ isOpen, article }) {
   if (!isOpen) return null
   return (
     <section className="test--article__body">
@@ -49,7 +47,11 @@ Article.propTypes = {
 
 export default connect(
   (state, { article }) => ({
-    loading: articleLoadingSelector(state, article.id)
+    loading: articleLoadingSelector(state, article.id),
+    loaded: articleLoadedSelector(state, article.id)
   }),
-  { deleteArticle, loadArticle }
+  (dispatch, { article }) => ({
+    deleteArticle,
+    getArticle: (id) => (article.loaded ? '' : dispatch(loadArticle(id)))
+  })
 )(Article)

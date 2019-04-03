@@ -40,7 +40,7 @@ export const loadAllArticles = () => ({
   callAPI: '/api/article'
 })
 
-export const loadArticle = (id) => async (dispatch) => {
+export const loadArticle = (id) => async (dispatch, getState) => {
   dispatch({
     type: LOAD_ARTICLE + START,
     payload: { id }
