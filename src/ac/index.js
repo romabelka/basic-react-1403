@@ -43,7 +43,8 @@ export const loadAllArticles = () => ({
 
 export const loadArticle = (id) => async (dispatch) => {
   dispatch({
-    type: LOAD_ARTICLE + START
+    type: LOAD_ARTICLE + START,
+    payload: { id }
   })
   fetch(`/api/article/${id}`)
     .then((res) => res.json())

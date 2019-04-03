@@ -4,9 +4,8 @@ import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
-import { articleLoadingSelector } from '../selectors'
 
-function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle, articleLoading }) {
+function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
     isOpen && !article.loaded && loadArticle(article.id)
   }, [isOpen])
@@ -19,7 +18,7 @@ function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle, arti
         {text}
       </button>
       <button onClick={() => deleteArticle(article.id)}>delete me</button>
-      {getBody({ isOpen, article, articleLoading })}
+      {getBody({ isOpen, article })}
     </div>
   )
 }
@@ -28,9 +27,9 @@ function setContainerRef(element) {
   //  console.log('---', element)
 }
 
-function getBody({ isOpen, article, articleLoading }) {
+function getBody({ isOpen, article }) {
   if (!isOpen) return null
-  if (articleLoading) return <Loader />
+  if (article.loading) return <Loader />
   return (
     <section className="test--article__body">
       {article.text}
@@ -48,8 +47,6 @@ Article.propTypes = {
 }
 
 export default connect(
-  (state) => ({
-    articleLoading: articleLoadingSelector(state)
-  }),
+  null,
   { deleteArticle, loadArticle }
 )(Article)
