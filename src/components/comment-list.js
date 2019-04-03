@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
+import { loadComments } from '../ac'
+import Loader from './common/loader'
 
-function CommentList({ article }) {
+function CommentList({ article, loadComments }) {
+  useEffect(() => {
+    console.log('88', article.commentsLoading)
+    console.log('88', article.commentsLoaded)
+    if (article.commentsLoading || article.commentsLoaded) return
+
+    console.log(1212)
+    loadComments(article.id)
+  }, [article.commentsLoading, article.commentsLoaded])
+
   const { isOpen, toggleOpen } = useToggler()
   const text = isOpen ? 'hide comments' : 'show comments'
+
   return (
     <div>
       <button onClick={toggleOpen} className="test--comment-list__btn">
@@ -17,8 +30,13 @@ function CommentList({ article }) {
   )
 }
 
-function getBody({ article: { comments, id }, isOpen }) {
+function getBody({ article: { comments, id, commentsLoading }, isOpen }) {
+  console.log(9)
   if (!isOpen) return null
+  console.log(19)
+  if (commentsLoading) return <Loader />
+
+  console.log(4343)
 
   const body =
     comments && comments.length ? (
@@ -41,9 +59,9 @@ function getBody({ article: { comments, id }, isOpen }) {
   )
 }
 
-CommentList.propTypes = {
-  comments: PropTypes.array
-}
+// CommentList.propTypes = {
+//   comments: PropTypes.array
+// }
 
 /*
 CommentList.defaultProps = {
@@ -52,4 +70,9 @@ CommentList.defaultProps = {
 }
 */
 
-export default CommentList
+// export default CommentList
+
+export default connect(
+  null,
+  { loadComments }
+)(CommentList)

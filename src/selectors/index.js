@@ -24,7 +24,10 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 const idSelector = (_, { id }) => id
-const commentsSelector = (state) => state.comments
+const commentsSelector = (state) => {
+  console.log('state.comments.entities', state)
+  return state.comments.entities
+}
 
 export const createCommentSelector = () =>
   createSelector(

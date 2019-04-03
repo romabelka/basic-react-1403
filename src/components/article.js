@@ -7,6 +7,7 @@ import Loader from './common/loader'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
+    console.log(1, isOpen)
     if (!isOpen || article.text || article.loading) return
 
     loadArticle(article.id)
@@ -15,7 +16,7 @@ function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   const text = isOpen ? 'close' : 'open'
 
   return (
-    <div ref={setContainerRef}>
+    <div>
       <h3>{article.title}</h3>
       <button onClick={onBtnClick} className="test--article__btn">
         {text}
@@ -26,14 +27,15 @@ function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   )
 }
 
-function setContainerRef(element) {
-  //  console.log('---', element)
-}
-
 function getBody({ isOpen, article }) {
+  console.log(2, isOpen)
   if (!isOpen) return null
 
+  console.log('99', article.loading)
+
   if (article.loading) return <Loader />
+
+  console.log('9999', article.loading)
 
   return (
     <section className="test--article__body">
