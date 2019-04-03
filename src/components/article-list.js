@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Article from './article'
 import accordion from '../decorators/accordion'
-import { articlesLoadingSelector, filtratedArticlesSelector } from '../selectors'
+import {
+  articlesLoadingSelector,
+  articlesLoadedSelector,
+  filtratedArticlesSelector
+} from '../selectors'
 import { loadAllArticles } from '../ac'
 import Loader from './common/loader'
 
@@ -21,8 +25,8 @@ export class ArticleList extends Component {
   }
 
   componentDidMount() {
-    const { fetchAll } = this.props
-    fetchAll && fetchAll()
+    const { fetchAll, loaded } = this.props
+    !loaded && fetchAll && fetchAll()
   }
 
   componentDidCatch(error) {
@@ -32,27 +36,29 @@ export class ArticleList extends Component {
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId, loading } = this.props
+    const { articles, toggleOpenItem, openItemId, loading, loaded } = this.props
     if (loading) return <Loader />
-
-    const articleItems = articles.map((article) => (
-      <li key={article.id} className="test--article-list__item">
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          onBtnClick={toggleOpenItem(article.id)}
-        />
-      </li>
-    ))
-
-    return <ul>{articleItems}</ul>
+    if (loaded) {
+      const articleItems = articles.map((article) => (
+        <li key={article.id} className="test--article-list__item">
+          <Article
+            article={article}
+            isOpen={article.id === openItemId}
+            onBtnClick={toggleOpenItem(article.id)}
+          />
+        </li>
+      ))
+      return <ul>{articleItems}</ul>
+    }
+    return <></>
   }
 }
 
 export default connect(
   (state) => ({
     articles: filtratedArticlesSelector(state),
-    loading: articlesLoadingSelector(state)
+    loading: articlesLoadingSelector(state),
+    loaded: articlesLoadedSelector(state)
   }),
   { fetchAll: loadAllArticles }
 )(accordion(ArticleList))
