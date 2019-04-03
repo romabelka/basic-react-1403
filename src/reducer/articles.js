@@ -17,9 +17,7 @@ const ArticleRecord = Record({
   id: null,
   date: null,
   comments: [],
-  loading: false,
-  commentsLoading: false,
-  commentsLoaded: false
+  loading: false
 })
 
 const ReducerRecord = Record({
@@ -55,14 +53,6 @@ export default (articlesState = new ReducerRecord(), action) => {
 
     case LOAD_ARTICLE + START:
       return articlesState.setIn(['entities', payload.id, 'loading'], true)
-
-    case LOAD_COMMENTS + START:
-      return articlesState.setIn(['entities', payload.articleId, 'commentsLoading'], true)
-
-    case LOAD_COMMENTS + SUCCESS:
-      return articlesState
-        .setIn(['entities', payload.articleId, 'commentsLoading'], false)
-        .setIn(['entities', payload.articleId, 'commentsLoaded'], true)
 
     case LOAD_ARTICLE + SUCCESS:
       return articlesState

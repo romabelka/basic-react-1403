@@ -5,8 +5,9 @@ export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
 export const articlesLoadingSelector = (state) => state.articles.get('loading')
-export const commentsLoadedSelector = (article) => article.get('commentsLoaded')
-export const commentsLoadingSelector = (article) => article.get('commentsLoading')
+export const commentsLoadedSelector = (state) => state.comments.get('commentsLoaded')
+export const commentsLoadingSelector = (state) => state.comments.get('commentsLoading')
+export const commentsErrorSelector = (state) => state.comments.get('error')
 
 export const filtratedArticlesSelector = createSelector(
   articleListSelector,
@@ -26,10 +27,7 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 const idSelector = (_, { id }) => id
-const commentsSelector = (state) => {
-  console.log('state.comments.entities', state)
-  return state.comments.entities
-}
+const commentsSelector = (state) => state.comments.entities
 
 export const createCommentSelector = () =>
   createSelector(

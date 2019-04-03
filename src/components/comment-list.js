@@ -6,9 +6,13 @@ import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
 import { loadComments } from '../ac'
 import Loader from './common/loader'
-import { commentsLoadedSelector, commentsLoadingSelector } from '../selectors'
+import {
+  commentsLoadedSelector,
+  commentsLoadingSelector,
+  commentsErrorSelector
+} from '../selectors'
 
-function CommentList({ article, loadComments, commentsLoaded, commentsLoading }) {
+function CommentList({ article, loadComments, commentsLoaded, commentsLoading, error }) {
   const { isOpen, toggleOpen } = useToggler()
 
   useEffect(() => {
@@ -24,12 +28,15 @@ function CommentList({ article, loadComments, commentsLoaded, commentsLoading })
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen, commentsLoaded, commentsLoading })}
+      {getBody({ article, isOpen, commentsLoaded, commentsLoading, error })}
     </div>
   )
 }
 
-function getBody({ article: { comments, id }, isOpen, commentsLoaded, commentsLoading }) {
+function getBody({ article: { comments, id }, isOpen, commentsLoaded, commentsLoading, error }) {
+  return
+  if (error) return <h2>OOooops</h2>
+
   if (!isOpen) return null
 
   if (commentsLoading) return <Loader />
@@ -62,9 +69,10 @@ CommentList.propTypes = {
 }
 
 export default connect(
-  (state, { article }) => ({
-    commentsLoaded: commentsLoadedSelector(article),
-    commentsLoading: commentsLoadingSelector(article)
+  (state) => ({
+    commentsLoaded: commentsLoadedSelector(state),
+    commentsLoading: commentsLoadingSelector(state),
+    error: commentsErrorSelector(state)
   }),
   { loadComments }
 )(CommentList)
