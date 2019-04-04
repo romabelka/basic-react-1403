@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Route, Switch } from 'react-router-dom'
+import { NavLink, Route, Switch, Redirect } from 'react-router-dom'
 import Filters from './filters'
 import Counter from './counter'
 import ArticlesRoute from './routes/articles'
@@ -42,10 +42,12 @@ function App() {
         }}
       />
       <Switch>
+        <Redirect from="/" exact to="/articles" />
         <Route path="/counter" component={Counter} exact />
         <Route path="/filters" component={Filters} />
         <Route path="/articles/new" render={() => <h1>New Article Form</h1>} />
         <Route path="/articles" component={ArticlesRoute} />
+        <Route path="/" render={() => <h1>Not Found</h1>} />
       </Switch>
     </>
   )
