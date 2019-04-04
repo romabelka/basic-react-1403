@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavLink, Route } from 'react-router-dom'
 import ArticleList from './article-list'
 import Filters from './filters'
 import Counter from './counter'
@@ -14,6 +15,19 @@ function App() {
   return (
     <>
       <h1>Article App</h1>
+      <div>
+        <div>
+          <NavLink to="/articles" activeStyle={{ color: 'red' }}>
+            Articles
+          </NavLink>
+          <NavLink to="/filters" activeStyle={{ color: 'red' }}>
+            Filters
+          </NavLink>
+          <NavLink to="/counter" activeStyle={{ color: 'red' }}>
+            Counter
+          </NavLink>
+        </div>
+      </div>
       Username:{' '}
       <input
         type="text"
@@ -23,9 +37,9 @@ function App() {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
-      <Counter />
-      <Filters articles={[]} />
-      <ArticleList />
+      <Route path="/counter" component={Counter} />
+      <Route path="/filters" component={Filters} />
+      <Route path="/articles" component={ArticleList} />
     </>
   )
 }
