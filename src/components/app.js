@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, Route } from 'react-router-dom'
-import ArticleList from './article-list'
 import Filters from './filters'
 import Counter from './counter'
+import ArticlesRoute from './routes/articles'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -20,9 +20,13 @@ function App() {
           <NavLink to="/articles" activeStyle={{ color: 'red' }}>
             Articles
           </NavLink>
+        </div>
+        <div>
           <NavLink to="/filters" activeStyle={{ color: 'red' }}>
             Filters
           </NavLink>
+        </div>
+        <div>
           <NavLink to="/counter" activeStyle={{ color: 'red' }}>
             Counter
           </NavLink>
@@ -39,7 +43,7 @@ function App() {
       />
       <Route path="/counter" component={Counter} />
       <Route path="/filters" component={Filters} />
-      <Route path="/articles" component={ArticleList} />
+      <Route path="/articles" component={ArticlesRoute} />
     </>
   )
 }
