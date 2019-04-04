@@ -10,7 +10,7 @@ import Loader from './common/loader'
 function CommentList({ article, loadArticleComments }) {
   const { isOpen, toggleOpen } = useToggler()
   useEffect(() => {
-    if (!isOpen || article.commentsLoaded || article.commentsLoaded) return
+    if (!isOpen || article.commentsLoaded || article.commentsLoading) return
     loadArticleComments(article.id)
   }, [isOpen])
 
