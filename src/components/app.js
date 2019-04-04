@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Route } from 'react-router-dom'
+import { NavLink, Route, Switch } from 'react-router-dom'
 import Filters from './filters'
 import Counter from './counter'
 import ArticlesRoute from './routes/articles'
@@ -41,9 +41,12 @@ function App() {
           color: username.length < 5 ? 'red' : 'black'
         }}
       />
-      <Route path="/counter" component={Counter} />
-      <Route path="/filters" component={Filters} />
-      <Route path="/articles" component={ArticlesRoute} />
+      <Switch>
+        <Route path="/counter" component={Counter} exact />
+        <Route path="/filters" component={Filters} />
+        <Route path="/articles/new" render={() => <h1>New Article Form</h1>} />
+        <Route path="/articles" component={ArticlesRoute} />
+      </Switch>
     </>
   )
 }
