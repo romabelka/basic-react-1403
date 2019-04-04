@@ -10,13 +10,13 @@ class ArticlesRoute extends Component {
     return (
       <div>
         <ArticleList />
-        <Route path="/articles/:id" render={this.getArticle} />
+        <Route path={`${this.props.match.path}/:id`} children={this.getArticle} />
       </div>
     )
   }
 
   getArticle = ({ match }) => {
-    console.log('---', 'article match: ', match)
+    if (!match) return <h1>Please select an article</h1>
     return <Article id={match.params.id} />
   }
 }
