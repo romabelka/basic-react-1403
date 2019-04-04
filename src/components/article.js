@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import Loader from './common/loader'
 
 function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
   useEffect(() => {
@@ -28,6 +29,7 @@ function setContainerRef(element) {
 
 function getBody({ isOpen, article }) {
   if (!isOpen) return null
+  if (article.loading) return <Loader />
 
   return (
     <section className="test--article__body">

@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
+import { loadArticleComments } from '../ac'
+import Loader from './common/loader'
 
-function CommentList({ article }) {
+function CommentList({ article, loadArticleComments }) {
   const { isOpen, toggleOpen } = useToggler()
+  useEffect(() => {
+    if (!isOpen || article.commentsLoaded || article.commentsLoaded) return
+    loadArticleComments(article.id)
+  }, [isOpen])
+
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
@@ -17,8 +25,9 @@ function CommentList({ article }) {
   )
 }
 
-function getBody({ article: { comments, id }, isOpen }) {
+function getBody({ article: { comments, id, commentsLoaded, commentsLoading }, isOpen }) {
   if (!isOpen) return null
+  if (commentsLoading || !commentsLoaded) return <Loader />
 
   const body =
     comments && comments.length ? (
@@ -52,4 +61,7 @@ CommentList.defaultProps = {
 }
 */
 
-export default CommentList
+export default connect(
+  null,
+  { loadArticleComments }
+)(CommentList)
