@@ -3,7 +3,7 @@ import { NavLink, Route, Switch, Redirect } from 'react-router-dom'
 import Filters from './filters'
 import Counter from './counter'
 import ArticlesRoute from './routes/articles'
-import CommentsRoute from './routes/comments'
+import CommentsPaginatorRoute from './routes/comments-paginator'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -49,7 +49,7 @@ function App() {
       />
       <Switch>
         <Redirect from="/" exact to="/articles" />
-        <Route path="/comment/1" component={CommentsRoute} />
+        <Route path="/comment" render={() => <CommentsPaginatorRoute page={1} />} />
         <Route path="/counter" component={Counter} exact />
         <Route path="/filters" component={Filters} />
         <Route path="/articles/new" render={() => <h1>New Article Form</h1>} />

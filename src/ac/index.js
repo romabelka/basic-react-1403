@@ -8,7 +8,8 @@ import {
   LOAD_ARTICLE,
   LOAD_ARTICLE_COMMENTS,
   START,
-  SUCCESS
+  SUCCESS,
+  LOAD_PAGINATOR_COMMENTS
 } from '../constants'
 
 export const increment = () => ({
@@ -62,5 +63,13 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
+  }
+}
+
+export function loadCommentsPaginator(page) {
+  return {
+    type: LOAD_PAGINATOR_COMMENTS,
+    payload: { page },
+    callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
   }
 }

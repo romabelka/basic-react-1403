@@ -39,3 +39,12 @@ export const articleSelector = createSelector(
   idSelector,
   (articles, id) => articles.get(id)
 )
+
+const pagesPaginatorSelector = (state) => state.commentsPaginator.get('entities')
+const pageSelector = (_, { page }) => page
+
+export const commentsPaginatorSelector = createSelector(
+  pagesPaginatorSelector,
+  pageSelector,
+  (pages, page) => pages.get(page)
+)
