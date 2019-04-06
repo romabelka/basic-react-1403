@@ -48,3 +48,5 @@ export const commentsPaginatorSelector = createSelector(
   pageSelector,
   (pages, page) => pages.get(page)
 )
+
+export const commentsTotalSelector = (state) => state.commentsPaginator.total

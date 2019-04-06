@@ -70,6 +70,6 @@ export function loadCommentsPaginator(page) {
   return {
     type: LOAD_PAGINATOR_COMMENTS,
     payload: { page },
-    callAPI: `/api/comment?limit=5&offset=${page * 5}`
+    callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
   }
 }
