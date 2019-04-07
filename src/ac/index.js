@@ -2,9 +2,11 @@ import {
   ADD_COMMENT,
   CHANGE_DATE_RANGE,
   CHANGE_SELECTION,
+  COMMENT_ITEMS_ON_PAGE,
   DELETE_ARTICLE,
   INCREMENT,
   LOAD_ALL_ARTICLES,
+  LOAD_ALL_COMMENTS,
   LOAD_ARTICLE,
   LOAD_ARTICLE_COMMENTS,
   START,
@@ -63,4 +65,24 @@ export function loadArticleComments(articleId) {
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
   }
+}
+
+export const loadAllComments = (pageNumber) => async (dispatch) => {
+  const page = pageNumber ? pageNumber : 1
+
+  dispatch({
+    type: LOAD_ALL_COMMENTS + START,
+    payload: { page }
+  })
+
+  const offset = (page - 1) * COMMENT_ITEMS_ON_PAGE
+
+  const rawRes = await fetch(`/api/comment?limit=5&offset=${offset}`)
+  const response = await rawRes.json()
+
+  dispatch({
+    type: LOAD_ALL_COMMENTS + SUCCESS,
+    payload: { page },
+    response
+  })
 }

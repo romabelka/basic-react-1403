@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 
 export const articlesMapSelector = (state) => state.articles.entities
 export const articleListSelector = (state) => articlesMapSelector(state).valueSeq()
+
 export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
@@ -39,3 +40,33 @@ export const articleSelector = createSelector(
   idSelector,
   (articles, id) => articles.get(id)
 )
+
+const pageSelector = (
+  _,
+  {
+    match: {
+      params: { page }
+    }
+  }
+) => (page ? page : 1)
+export const commentsPageSelector = (state) => state.comments.pageEntities
+export const commentsListSelector = createSelector(
+  commentsPageSelector,
+  pageSelector,
+  (pageComments, page) => {
+    const pageData = pageComments.get(page)
+    return pageData
+      ? {
+          comments: pageData.get('comments') ? pageData.get('comments').valueSeq() : [],
+          loading: pageData.get('loading'),
+          loaded: pageData.get('loaded')
+        }
+      : {
+          comments: [],
+          loading: null,
+          loaded: null
+        }
+  }
+)
+
+export const commentsTotalCount = (state) => state.comments.totalCount
