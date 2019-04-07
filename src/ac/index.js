@@ -8,7 +8,8 @@ import {
   LOAD_ARTICLE,
   LOAD_ARTICLE_COMMENTS,
   START,
-  SUCCESS
+  SUCCESS,
+  LOAD_COMMENT
 } from '../constants'
 
 export const increment = () => ({
@@ -62,5 +63,14 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
+  }
+}
+
+export function loadComments(pageNum, limit) {
+  console.log(pageNum)
+  return {
+    type: LOAD_COMMENT,
+    payload: { pageNum },
+    callAPI: `/api/comment?limit=${limit}&offset=${(pageNum - 1) * limit}`
   }
 }
