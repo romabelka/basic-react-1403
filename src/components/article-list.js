@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Article from './article'
 import accordion from '../decorators/accordion'
 import { articlesLoadingSelector, filtratedArticlesSelector } from '../selectors'
 import { loadAllArticles } from '../ac'
