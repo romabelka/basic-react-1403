@@ -39,3 +39,15 @@ export const articleSelector = createSelector(
   idSelector,
   (articles, id) => articles.get(id)
 )
+
+const pageSelector = (_, props) => {
+  return parseInt(props.match.params.page)
+}
+const commentsPagesSelector = (state) => state.comments.pages
+export const commentsTotalSelector = (state) => state.comments.total
+export const pagesCommentsSelector = () =>
+  createSelector(
+    commentsPagesSelector,
+    pageSelector,
+    (pages, currentPage) => pages.get(currentPage)
+  )
