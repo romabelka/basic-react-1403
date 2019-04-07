@@ -3,6 +3,7 @@ import { NavLink, Route, Switch, Redirect } from 'react-router-dom'
 import Filters from './filters'
 import Counter from './counter'
 import ArticlesRoute from './routes/articles'
+import CommentPagRoute from './routes/comment-pag'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -31,6 +32,11 @@ function App() {
             Counter
           </NavLink>
         </div>
+        <div>
+          <NavLink to="/comment-pag" activeStyle={{ color: 'red' }}>
+            Comment pagination
+          </NavLink>
+        </div>
       </div>
       Username:{' '}
       <input
@@ -47,6 +53,7 @@ function App() {
         <Route path="/filters" component={Filters} />
         <Route path="/articles/new" render={() => <h1>New Article Form</h1>} />
         <Route path="/articles" component={ArticlesRoute} />
+        <Route path="/comment-pag" component={CommentPagRoute} />
         <Route path="/" render={() => <h1>Not Found</h1>} />
       </Switch>
     </>
