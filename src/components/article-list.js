@@ -6,6 +6,7 @@ import accordion from '../decorators/accordion'
 import { articlesLoadingSelector, filtratedArticlesSelector } from '../selectors'
 import { loadAllArticles } from '../ac'
 import Loader from './common/loader'
+import { NavLink } from 'react-router-dom'
 
 export class ArticleList extends Component {
   static propTypes = {
@@ -32,16 +33,14 @@ export class ArticleList extends Component {
   render() {
     if (this.state.error) return <h2>OOooops</h2>
 
-    const { articles, toggleOpenItem, openItemId, loading } = this.props
+    const { articles, loading } = this.props
     if (loading) return <Loader />
 
     const articleItems = articles.map((article) => (
       <li key={article.id} className="test--article-list__item">
-        <Article
-          article={article}
-          isOpen={article.id === openItemId}
-          onBtnClick={toggleOpenItem(article.id)}
-        />
+        <NavLink to={`/articles/${article.id}`} activeStyle={{ color: 'red' }}>
+          {article.title}
+        </NavLink>
       </li>
     ))
 

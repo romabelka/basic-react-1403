@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
 
-export const articleListSelector = (state) => state.articles.entities.valueSeq()
+export const articlesMapSelector = (state) => state.articles.entities
+export const articleListSelector = (state) => articlesMapSelector(state).valueSeq()
 export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
@@ -24,7 +25,7 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 const idSelector = (_, { id }) => id
-const commentsSelector = (state) => state.comments
+const commentsSelector = (state) => state.comments.entities
 
 export const createCommentSelector = () =>
   createSelector(
@@ -32,3 +33,9 @@ export const createCommentSelector = () =>
     idSelector,
     (comments, id) => comments.get(id)
   )
+
+export const articleSelector = createSelector(
+  articlesMapSelector,
+  idSelector,
+  (articles, id) => articles.get(id)
+)
