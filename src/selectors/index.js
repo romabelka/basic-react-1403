@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { LIMIT } from '../constants'
 
 export const articlesMapSelector = (state) => state.articles.entities
 export const articleListSelector = (state) => articlesMapSelector(state).valueSeq()
@@ -38,4 +39,15 @@ export const articleSelector = createSelector(
   articlesMapSelector,
   idSelector,
   (articles, id) => articles.get(id)
+)
+
+export const commentsTotalPagesSelector = (state) => Math.ceil(state.comments.totalSize / LIMIT)
+
+const pageSelector = (_, { page }) => page
+const commentsPagesSelector = (state) => state.comments.pages
+
+export const commentsPageSelector = createSelector(
+  commentsPagesSelector,
+  pageSelector,
+  (pages, pageNum) => pages.get(pageNum)
 )
