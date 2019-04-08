@@ -3,6 +3,7 @@ import {
   CHANGE_DATE_RANGE,
   CHANGE_SELECTION,
   DELETE_ARTICLE,
+  FAIL,
   INCREMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
@@ -11,6 +12,7 @@ import {
   START,
   SUCCESS
 } from '../constants'
+import history from '../history'
 
 export const increment = () => ({
   type: INCREMENT
@@ -48,14 +50,26 @@ export const loadArticle = (id) => async (dispatch) => {
     payload: { id }
   })
 
-  const rawRes = await fetch(`/api/article/${id}`)
-  const response = await rawRes.json()
+  try {
+    const rawRes = await fetch(`/api/article/${id}`)
+    if (rawRes.status >= 400) throw new Error(rawRes.statusText)
 
-  dispatch({
-    type: LOAD_ARTICLE + SUCCESS,
-    payload: { id },
-    response
-  })
+    const response = await rawRes.json()
+
+    dispatch({
+      type: LOAD_ARTICLE + SUCCESS,
+      payload: { id },
+      response
+    })
+  } catch (error) {
+    history.push('/error')
+
+    dispatch({
+      type: LOAD_ARTICLE + FAIL,
+      payload: { id },
+      error
+    })
+  }
 }
 
 export function loadArticleComments(articleId) {
