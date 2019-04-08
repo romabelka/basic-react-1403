@@ -5,6 +5,7 @@ import Counter from './counter'
 import ArticlesRoute from './routes/articles'
 import CommentsRoute from './routes/comments'
 import Menu, { MenuItem } from './menu'
+import { Provider } from './contexts/user-context'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -16,22 +17,24 @@ function App() {
 
   return (
     <>
-      <h1>Article App</h1>
-      <Menu>
-        <MenuItem to="/comments" children={'Comments'} />
-        <MenuItem to="/articles">Articles</MenuItem>
-        <MenuItem to="/filters">Filters</MenuItem>
-        <MenuItem to="/counter">Counter</MenuItem>
-      </Menu>
-      Username:{' '}
-      <input
-        type="text"
-        value={username}
-        onChange={handleUserChange}
-        style={{
-          color: username.length < 5 ? 'red' : 'black'
-        }}
-      />
+      <Provider value={username}>
+        <h1>Article App</h1>
+        <Menu>
+          <MenuItem to="/comments" children={'Comments'} />
+          <MenuItem to="/articles">Articles</MenuItem>
+          <MenuItem to="/filters">Filters</MenuItem>
+          <MenuItem to="/counter">Counter</MenuItem>
+        </Menu>
+        Username:{' '}
+        <input
+          type="text"
+          value={username}
+          onChange={handleUserChange}
+          style={{
+            color: username.length < 5 ? 'red' : 'black'
+          }}
+        />
+      </Provider>
       <Switch>
         <Redirect from="/" exact to="/articles" />
         <Redirect from="/comments" exact to="/comments/1" />

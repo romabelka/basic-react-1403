@@ -6,6 +6,7 @@ import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
 import { loadArticleComments } from '../ac'
 import Loader from './common/loader'
+import { Consumer } from './contexts/user-context'
 
 function CommentList({ article, loadArticleComments }) {
   const { isOpen, toggleOpen } = useToggler()
@@ -45,6 +46,7 @@ function getBody({ article: { comments, id, commentsLoaded, commentsLoading }, i
   return (
     <div className="test--comment-list__body">
       {body}
+      <Consumer>{(username) => <h3>{username}</h3>}</Consumer>
       <CommentForm articleId={id} />
     </div>
   )
