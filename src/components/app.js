@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { NavLink, Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Filters from './filters'
 import Counter from './counter'
 import ArticlesRoute from './routes/articles'
 import CommentsRoute from './routes/comments'
+import Menu, { MenuItem } from './menu'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -16,28 +17,12 @@ function App() {
   return (
     <>
       <h1>Article App</h1>
-      <div>
-        <div>
-          <NavLink to="/comments" activeStyle={{ color: 'red' }}>
-            Comments
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to="/articles" activeStyle={{ color: 'red' }}>
-            Articles
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to="/filters" activeStyle={{ color: 'red' }}>
-            Filters
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to="/counter" activeStyle={{ color: 'red' }}>
-            Counter
-          </NavLink>
-        </div>
-      </div>
+      <Menu>
+        <MenuItem to="/comments" children={'Comments'} />
+        <MenuItem to="/articles">Articles</MenuItem>
+        <MenuItem to="/filters">Filters</MenuItem>
+        <MenuItem to="/counter">Counter</MenuItem>
+      </Menu>
       Username:{' '}
       <input
         type="text"
