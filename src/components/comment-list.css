@@ -1,0 +1,26 @@
+.comments-transition {
+    display: none;
+}
+
+.comments-transition-enter {
+    display: block;
+    opacity: 0;
+}
+.comments-transition-enter-active {
+    display: block;
+    opacity: 1;
+    transition: opacity 5000ms;
+}
+.comments-transition-exit {
+    display: block;
+    opacity: 1;
+}
+.comments-transition-exit-active {
+    display: block;
+    opacity: 0;
+    transition: opacity 5000ms;
+}
+
+.comments-transition-exit-done {
+    display: none;
+}

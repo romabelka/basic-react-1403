@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
@@ -7,6 +8,7 @@ import CommentForm from './comment-form'
 import { loadArticleComments } from '../ac'
 import Loader from './common/loader'
 import { Consumer } from './contexts/user-context'
+import './comment-list.css'
 
 function CommentList({ article, loadArticleComments }) {
   const { isOpen, toggleOpen } = useToggler()
@@ -21,13 +23,14 @@ function CommentList({ article, loadArticleComments }) {
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen })}
+      <CSSTransition in={isOpen} classNames="comments-transition" timeout={5000}>
+        <div className="comments-transition">{getBody({ article, isOpen })}</div>
+      </CSSTransition>
     </div>
   )
 }
 
-function getBody({ article: { comments, id, commentsLoaded, commentsLoading }, isOpen }) {
-  if (!isOpen) return null
+function getBody({ article: { comments, id, commentsLoaded, commentsLoading } }) {
   if (commentsLoading || !commentsLoaded) return <Loader />
 
   const body =
