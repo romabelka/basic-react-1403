@@ -1,3 +1,4 @@
+import { replace, push } from 'connected-react-router'
 import {
   ADD_COMMENT,
   CHANGE_DATE_RANGE,
@@ -12,7 +13,6 @@ import {
   START,
   SUCCESS
 } from '../constants'
-import history from '../history'
 
 export const increment = () => ({
   type: INCREMENT
@@ -62,7 +62,7 @@ export const loadArticle = (id) => async (dispatch) => {
       response
     })
   } catch (error) {
-    history.push('/error')
+    dispatch(replace('/error'))
 
     dispatch({
       type: LOAD_ARTICLE + FAIL,

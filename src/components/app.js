@@ -55,6 +55,7 @@ function App() {
         <Route path="/articles/new" render={() => <h1>New Article Form</h1>} />
         <Route path="/articles" component={ArticlesRoute} />
         <Route path="/comments" component={CommentsRoute} />
+        <Route path="/error" render={() => <h1>Error</h1>} />
         <Route path="/" render={() => <h1>Not Found</h1>} />
       </Switch>
     </>
