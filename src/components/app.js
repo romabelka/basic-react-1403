@@ -6,8 +6,9 @@ import ArticlesRoute from './routes/articles'
 import CommentsRoute from './routes/comments'
 import Menu, { MenuItem } from './menu'
 import { Provider } from './contexts/user-context'
-import { LangProvider } from './contexts/lang-context'
+import { LangProvider, LangConsumer } from './contexts/lang-context'
 import Language from './language'
+import { interLib } from '../lib/interLibDict'
 
 function App() {
   const [username, setUsername] = useState('Roma')
@@ -25,15 +26,21 @@ function App() {
 
   return (
     <>
-      <LangProvider value={lang}>
+      <LangProvider value={{ lang, interLib }}>
         <Provider value={username}>
           <Language handleClick={handleLangChange} />
           <h1>Article App</h1>
           <Menu>
-            <MenuItem to="/comments" children={'Comments'} />
-            <MenuItem to="/articles">Articles</MenuItem>
-            <MenuItem to="/filters">Filters</MenuItem>
-            <MenuItem to="/counter">Counter</MenuItem>
+            <LangConsumer>
+              {({ lang, interLib }) => (
+                <div>
+                  <MenuItem to="/comments">{interLib[lang].comments}</MenuItem>
+                  <MenuItem to="/articles">{interLib[lang].articles}</MenuItem>
+                  <MenuItem to="/filters">{interLib[lang].filters}</MenuItem>
+                  <MenuItem to="/counter">{interLib[lang].counter}</MenuItem>
+                </div>
+              )}
+            </LangConsumer>
           </Menu>
           Username:{' '}
           <input
