@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addComment } from '../../ac'
 import './style.css'
+import withLocalization from '../../l10n/with-localization'
 
 class CommentForm extends Component {
   static propTypes = {}
@@ -14,13 +15,13 @@ class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        user:{' '}
+        {this.props.strings['user']}:{' '}
         <input
           value={this.state.user}
           onChange={this.handleChange('user')}
           className={this.getClassName('user')}
         />
-        comment:{' '}
+        {this.props.strings['comment']}:{' '}
         <input
           value={this.state.text}
           onChange={this.handleChange('text')}
@@ -71,4 +72,4 @@ export default connect(
   (dispatch, ownProps) => ({
     addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
   })
-)(CommentForm)
+)(withLocalization(CommentForm))

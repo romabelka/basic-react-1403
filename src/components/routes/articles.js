@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import ArticleList from '../article-list'
 import Article from '../article'
+import withLocalization from '../../l10n/with-localization'
 
 class ArticlesRoute extends Component {
   static propTypes = {}
@@ -16,9 +17,9 @@ class ArticlesRoute extends Component {
   }
 
   getArticle = ({ match }) => {
-    if (!match) return <h1>Please select an article</h1>
+    if (!match) return <h1>{this.props.strings['select.article']}</h1>
     return <Article id={match.params.id} />
   }
 }
 
-export default ArticlesRoute
+export default withLocalization(ArticlesRoute)

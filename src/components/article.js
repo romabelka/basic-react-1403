@@ -5,8 +5,9 @@ import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
 import { articleSelector } from '../selectors'
+import withLocalization from '../l10n/with-localization'
 
-function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
+function Article({ article, onBtnClick, deleteArticle, loadArticle, id, strings }) {
   useEffect(() => {
     if (article && (article.text || article.loading)) return
     loadArticle(id)
@@ -17,7 +18,7 @@ function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
-      <button onClick={() => deleteArticle(article.id)}>delete me</button>
+      <button onClick={() => deleteArticle(article.id)}>{strings['delete']}</button>
       {getBody({ article })}
     </div>
   )
@@ -52,4 +53,4 @@ export default connect(
     article: articleSelector(state, ownProps)
   }),
   { deleteArticle, loadArticle }
-)(Article)
+)(withLocalization(Article))
