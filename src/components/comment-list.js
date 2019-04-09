@@ -29,7 +29,6 @@ function CommentList({ article, loadArticleComments }) {
     </div>
   )
 }
-
 function getBody({ article: { comments, id, commentsLoaded, commentsLoading } }) {
   if (commentsLoading || !commentsLoaded) return <Loader />
 
