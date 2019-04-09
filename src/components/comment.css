@@ -1,0 +1,29 @@
+.comment {
+  display: none;
+}
+
+.comment-enter {
+  display: block;
+  opacity: 0;
+}
+.comment-enter-active {
+  display: block;
+  opacity: 1;
+  transition: opacity 5000ms;
+}
+.comment-enter-done {
+  display: block;
+}
+.comment-exit {
+  display: block;
+  opacity: 1;
+}
+.comment-exit-active {
+  display: block;
+  opacity: 0;
+  transition: opacity 5000ms;
+}
+
+.comment-exit-done {
+  display: none;
+}

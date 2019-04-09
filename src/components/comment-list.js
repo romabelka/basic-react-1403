@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { connect } from 'react-redux'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
@@ -29,18 +29,21 @@ function CommentList({ article, loadArticleComments }) {
     </div>
   )
 }
-
 function getBody({ article: { comments, id, commentsLoaded, commentsLoading } }) {
   if (commentsLoading || !commentsLoaded) return <Loader />
 
   const body =
     comments && comments.length ? (
       <ul>
-        {comments.map((commentId) => (
-          <li key={commentId} className="test--comment-list__item">
-            <Comment id={commentId} />
-          </li>
-        ))}
+        <TransitionGroup>
+          {comments.map((commentId) => (
+            <CSSTransition key={commentId} timeout={5000} classNames="comment">
+              <li className="test--comment-list__item">
+                <Comment id={commentId} />
+              </li>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
       </ul>
     ) : (
       <h3 className="test--comment-list__empty">No comments yet</h3>

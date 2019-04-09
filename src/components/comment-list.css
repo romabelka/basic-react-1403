@@ -11,6 +11,9 @@
     opacity: 1;
     transition: opacity 5000ms;
 }
+.comments-transition-enter-done {
+    display: block;
+}
 .comments-transition-exit {
     display: block;
     opacity: 1;
