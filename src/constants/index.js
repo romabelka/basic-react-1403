@@ -15,3 +15,28 @@ export const LOAD_ARTICLE_COMMENTS = 'LOAD_ARTICLE_COMMENTS'
 export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 export const FAIL = '_FAIL'
+
+export const translations = {
+  en: {
+    mainMenu: 'Main Menu',
+    loading: 'Loading...',
+    comments: {
+      hide: 'hide comments',
+      show: 'show comments'
+    },
+    articles: {
+      delete: 'Delete me'
+    }
+  },
+  ru: {
+    mainMenu: 'Главное меню',
+    loading: 'Загрузка...',
+    comments: {
+      hide: 'Скрыть комментарии',
+      show: 'Показать комментарии'
+    },
+    articles: {
+      delete: 'Удалить статью'
+    }
+  }
+}

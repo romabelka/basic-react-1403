@@ -8,6 +8,8 @@ import CommentForm from './comment-form'
 import { loadArticleComments } from '../ac'
 import Loader from './common/loader'
 import { Consumer } from './contexts/user-context'
+import { TranslationConsumer } from './contexts/translation-context'
+
 import './comment-list.css'
 
 function CommentList({ article, loadArticleComments }) {
@@ -17,11 +19,12 @@ function CommentList({ article, loadArticleComments }) {
     loadArticleComments(article.id)
   }, [isOpen])
 
-  const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
       <button onClick={toggleOpen} className="test--comment-list__btn">
-        {text}
+        <TranslationConsumer>
+          {(lang) => (isOpen ? lang.comments.hide : lang.comments.show)}
+        </TranslationConsumer>
       </button>
       <CSSTransition in={isOpen} classNames="comments-transition" timeout={5000}>
         <div className="comments-transition">{getBody({ article, isOpen })}</div>
