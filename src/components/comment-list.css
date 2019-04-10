@@ -24,3 +24,15 @@
 .comments-transition-exit-done {
     display: none;
 }
+
+.item-enter {
+    margin-left: -200px;
+    background-color: lightgreen;
+}
+
+.item-enter-active {
+    opacity: 1;
+    margin-left: 0px;
+    background-color: none;
+    transition: margin-left 500ms ease-in, background-color 500ms;
+}

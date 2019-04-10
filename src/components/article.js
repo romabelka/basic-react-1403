@@ -5,6 +5,7 @@ import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
 import { articleSelector } from '../selectors'
+import { LanguageConsumer } from './contexts/language'
 
 function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   useEffect(() => {
@@ -15,11 +16,17 @@ function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   if (!article) return null
 
   return (
-    <div ref={setContainerRef}>
-      <h3>{article.title}</h3>
-      <button onClick={() => deleteArticle(article.id)}>delete me</button>
-      {getBody({ article })}
-    </div>
+    <LanguageConsumer>
+      {(dictionary) => (
+        <div ref={setContainerRef}>
+          <h3>{article.title}</h3>
+          <button onClick={() => deleteArticle(article.id)}>
+            {dictionary.deleteArticleButton}
+          </button>
+          {getBody({ article })}
+        </div>
+      )}
+    </LanguageConsumer>
   )
 }
 
