@@ -1,26 +1,41 @@
 .comments-transition {
-    display: none;
+  display: none;
 }
 
 .comments-transition-enter {
-    display: block;
-    opacity: 0;
+  display: block;
+  opacity: 0;
 }
 .comments-transition-enter-active {
-    display: block;
-    opacity: 1;
-    transition: opacity 5000ms;
+  display: block;
+  opacity: 1;
+  transition: opacity 5000ms;
 }
 .comments-transition-exit {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
 }
 .comments-transition-exit-active {
-    display: block;
-    opacity: 0;
-    transition: opacity 5000ms;
+  display: block;
+  opacity: 0;
+  transition: opacity 5000ms;
 }
 
 .comments-transition-exit-done {
-    display: none;
+  display: none;
+}
+
+.comment-list-transition-comment-enter {
+  opacity: 0;
+}
+.comment-list-transition-comment-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.comment-list-transition-comment-exit {
+  opacity: 1;
+}
+.comment-list-transition-comment-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }
