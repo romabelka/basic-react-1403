@@ -5,6 +5,7 @@ import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
 import { articleSelector } from '../selectors'
+import { TranslationConsumer } from './contexts/translation-context'
 
 function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   useEffect(() => {
@@ -17,7 +18,9 @@ function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
-      <button onClick={() => deleteArticle(article.id)}>delete me</button>
+      <button onClick={() => deleteArticle(article.id)}>
+        <TranslationConsumer>{(lang) => lang.articles.delete}</TranslationConsumer>
+      </button>
       {getBody({ article })}
     </div>
   )

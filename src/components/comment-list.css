@@ -1,6 +1,6 @@
-.comments-transition {
-    display: none;
-}
+/*.comments-transition {*/
+    /*display: none;*/
+/*}*/
 
 .comments-transition-enter {
     display: block;
@@ -21,6 +21,22 @@
     transition: opacity 5000ms;
 }
 
-.comments-transition-exit-done {
-    display: none;
+/*.comments-transition-exit-done {*/
+    /*display: none;*/
+/*}*/
+
+.comment-enter {
+    opacity: 0;
 }
+.comment-enter-active {
+    opacity: 1;
+    transition: opacity 1500ms ease-in;
+}
+.comment-exit {
+    opacity: 1;
+}
+.comment-exit-active {
+    opacity: 0;
+    transition: opacity 1500ms ease-in;
+}
+
