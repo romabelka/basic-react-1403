@@ -1,24 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { CSSTransition } from 'react-transition-group'
+import { connect } from 'react-redux'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 import CommentForm from './comment-form'
+import { loadArticleComments } from '../ac'
+import Loader from './common/loader'
+import { Consumer } from './contexts/user-context'
+import './comment-list.css'
 
-function CommentList({ article }) {
+function CommentList({ article, loadArticleComments }) {
   const { isOpen, toggleOpen } = useToggler()
+  useEffect(() => {
+    if (!isOpen || article.commentsLoaded || article.commentsLoading) return
+    loadArticleComments(article.id)
+  }, [isOpen])
+
   const text = isOpen ? 'hide comments' : 'show comments'
   return (
     <div>
       <button onClick={toggleOpen} className="test--comment-list__btn">
         {text}
       </button>
-      {getBody({ article, isOpen })}
+      <CSSTransition in={isOpen} classNames="comments-transition" timeout={5000}>
+        <div className="comments-transition">{getBody({ article, isOpen })}</div>
+      </CSSTransition>
     </div>
   )
 }
 
-function getBody({ article: { comments, id }, isOpen }) {
-  if (!isOpen) return null
+function getBody({ article: { comments, id, commentsLoaded, commentsLoading } }) {
+  if (commentsLoading || !commentsLoaded) return <Loader />
 
   const body =
     comments && comments.length ? (
@@ -36,6 +49,7 @@ function getBody({ article: { comments, id }, isOpen }) {
   return (
     <div className="test--comment-list__body">
       {body}
+      <Consumer>{(username) => <h3>{username}</h3>}</Consumer>
       <CommentForm articleId={id} />
     </div>
   )
@@ -52,4 +66,7 @@ CommentList.defaultProps = {
 }
 */
 
-export default CommentList
+export default connect(
+  null,
+  { loadArticleComments }
+)(CommentList)

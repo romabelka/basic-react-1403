@@ -3,21 +3,22 @@ import PropTypes from 'prop-types'
 import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
+import Loader from './common/loader'
+import { articleSelector } from '../selectors'
 
-function Article({ isOpen, article, onBtnClick, deleteArticle, loadArticle }) {
+function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   useEffect(() => {
-    isOpen && loadArticle(article.id)
-  }, [isOpen])
+    if (article && (article.text || article.loading)) return
+    loadArticle(id)
+  }, [id])
 
-  const text = isOpen ? 'close' : 'open'
+  if (!article) return null
+
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
-      <button onClick={onBtnClick} className="test--article__btn">
-        {text}
-      </button>
       <button onClick={() => deleteArticle(article.id)}>delete me</button>
-      {getBody({ isOpen, article })}
+      {getBody({ article })}
     </div>
   )
 }
@@ -26,8 +27,8 @@ function setContainerRef(element) {
   //  console.log('---', element)
 }
 
-function getBody({ isOpen, article }) {
-  if (!isOpen) return null
+function getBody({ article }) {
+  if (article.loading) return <Loader />
 
   return (
     <section className="test--article__body">
@@ -39,13 +40,16 @@ function getBody({ isOpen, article }) {
 
 Article.propTypes = {
   article: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    title: PropTypes.string,
     text: PropTypes.string
-  })
+  }),
+  id: PropTypes.string
 }
 
 export default connect(
-  null,
+  (state, ownProps) => ({
+    article: articleSelector(state, ownProps)
+  }),
   { deleteArticle, loadArticle }
 )(Article)
