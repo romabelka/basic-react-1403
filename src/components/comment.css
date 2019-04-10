@@ -1,29 +1,29 @@
-.comments-transition {
+.comment {
     display: none;
 }
 
-.comments-transition-enter {
+.comment-enter {
     display: block;
     opacity: 0;
 }
-.comments-transition-enter-active {
+.comment-enter-active {
     display: block;
     opacity: 1;
     transition: opacity 2000ms;
 }
-.comments-transition-enter-done {
+.comment-enter-done {
     display: block;
 }
-.comments-transition-exit {
+.comment-exit {
     display: block;
     opacity: 1;
 }
-.comments-transition-exit-active {
+.comment-exit-active {
     display: block;
     opacity: 0;
     transition: opacity 2000ms;
 }
 
-.comments-transition-exit-done {
+.comment-exit-done {
     display: none;
 }
