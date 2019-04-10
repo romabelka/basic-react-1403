@@ -5,11 +5,14 @@ import { ConnectedRouter } from 'connected-react-router'
 import App from './components/app'
 import store from './store'
 import history from './history'
+import LocalizationProvider from './components/localization/localization-provider'
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <LocalizationProvider>
+        <App />
+      </LocalizationProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
