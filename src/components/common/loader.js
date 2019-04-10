@@ -1,9 +1,10 @@
 import React from 'react'
+import LocalizedComponent from '../localization/localized-component-decorator'
 
-function Loader() {
-  return <h3>Loading...</h3>
+function Loader({ dictionary }) {
+  return <h3>{dictionary['loading']}...</h3>
 }
 
 Loader.propTypes = {}
 
-export default Loader
+export default LocalizedComponent(Loader)

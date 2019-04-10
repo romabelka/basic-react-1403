@@ -9,15 +9,16 @@ import { loadArticleComments } from '../ac'
 import Loader from './common/loader'
 import { Consumer } from './contexts/user-context'
 import './comment-list.css'
+import LocalizedComponent from './localization/localized-component-decorator'
 
-function CommentList({ article, loadArticleComments }) {
+function CommentList({ article, loadArticleComments, dictionary }) {
   const { isOpen, toggleOpen } = useToggler()
   useEffect(() => {
     if (!isOpen || article.commentsLoaded || article.commentsLoading) return
     loadArticleComments(article.id)
   }, [isOpen])
 
-  const text = isOpen ? 'hide comments' : 'show comments'
+  const text = isOpen ? dictionary['hide.comments'] : dictionary['show.comments']
   return (
     <div>
       <button onClick={toggleOpen} className="test--comment-list__btn">
@@ -69,4 +70,4 @@ CommentList.defaultProps = {
 export default connect(
   null,
   { loadArticleComments }
-)(CommentList)
+)(LocalizedComponent(CommentList))
