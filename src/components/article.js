@@ -5,8 +5,9 @@ import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
 import { articleSelector } from '../selectors'
+import i18n from './i18n'
 
-function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
+function Article({ article, onBtnClick, deleteArticle, loadArticle, id, t }) {
   useEffect(() => {
     if (article && (article.text || article.loading)) return
     loadArticle(id)
@@ -17,7 +18,7 @@ function Article({ article, onBtnClick, deleteArticle, loadArticle, id }) {
   return (
     <div ref={setContainerRef}>
       <h3>{article.title}</h3>
-      <button onClick={() => deleteArticle(article.id)}>delete me</button>
+      <button onClick={() => deleteArticle(article.id)}>{t('delete me')}</button>
       {getBody({ article })}
     </div>
   )
@@ -47,9 +48,11 @@ Article.propTypes = {
   id: PropTypes.string
 }
 
-export default connect(
-  (state, ownProps) => ({
-    article: articleSelector(state, ownProps)
-  }),
-  { deleteArticle, loadArticle }
-)(Article)
+export default i18n(
+  connect(
+    (state, ownProps) => ({
+      article: articleSelector(state, ownProps)
+    }),
+    { deleteArticle, loadArticle }
+  )(Article)
+)

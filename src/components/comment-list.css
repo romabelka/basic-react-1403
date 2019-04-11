@@ -11,6 +11,9 @@
     opacity: 1;
     transition: opacity 5000ms;
 }
+.comments-transition-enter-done {
+    display: block;
+}
 .comments-transition-exit {
     display: block;
     opacity: 1;
@@ -23,4 +26,19 @@
 
 .comments-transition-exit-done {
     display: none;
+}
+
+.comment-enter {
+    opacity: 0;
+}
+.comment-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.comment-exit {
+    opacity: 1;
+}
+.comment-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
 }
