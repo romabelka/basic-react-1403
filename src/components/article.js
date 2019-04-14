@@ -4,14 +4,14 @@ import { deleteArticle, loadArticle } from '../ac'
 import CommentList from './comment-list'
 import { connect } from 'react-redux'
 import Loader from './common/loader'
-import { articleSelector } from '../selectors'
+import { articleSelector, articlesLoadedSelector } from '../selectors'
 import i18n from './i18n'
 
-function Article({ article, onBtnClick, deleteArticle, loadArticle, id, t }) {
+function Article({ article, onBtnClick, deleteArticle, loadArticle, id, t, articlesLoaded }) {
   useEffect(() => {
-    if (article && (article.text || article.loading)) return
+    if (article && (article.text || article.loading) && !articlesLoaded) return
     loadArticle(id)
-  }, [id])
+  }, [id, articlesLoaded])
 
   if (!article) return null
 
@@ -51,7 +51,8 @@ Article.propTypes = {
 export default i18n(
   connect(
     (state, ownProps) => ({
-      article: articleSelector(state, ownProps)
+      article: articleSelector(state, ownProps),
+      articlesLoaded: articlesLoadedSelector(state)
     }),
     { deleteArticle, loadArticle }
   )(Article)

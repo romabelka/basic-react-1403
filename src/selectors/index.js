@@ -6,6 +6,7 @@ export const filtersSelector = (state) => state.filters
 export const dateRangeSelector = (state) => filtersSelector(state).dateRange
 export const selectedSelector = (state) => filtersSelector(state).selected
 export const articlesLoadingSelector = (state) => state.articles.get('loading')
+export const articlesLoadedSelector = (state) => state.articles.get('loaded')
 
 export const filtratedArticlesSelector = createSelector(
   articleListSelector,
