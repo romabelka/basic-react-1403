@@ -11,7 +11,7 @@ function Article({ article, onBtnClick, deleteArticle, loadArticle, id, t }) {
   useEffect(() => {
     if (article && (article.text || article.loading)) return
     loadArticle(id)
-  }, [id])
+  }, [id, article])
 
   if (!article) return null
 
